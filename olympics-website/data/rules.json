@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "Title": "General Rules",
+        "Rules": ["1.", "2. "]
+    },
+    {
+        "id": 2,
+        "Title": "Team Rules",
+        "Rules": ["1.", "2. "]
+    },
+    {
+        "id": 3,
+        "Title": "Scoring",
+        "Rules": ["1.", "2. "]
+    },
+    {
+        "id": 4,
+        "Title": "Scoring",
+        "Rules": ["1.", "2. "]
+    },
+    {
+        "id": 5,
+        "Title": "Code of Conduct",
+        "Rules": ["1.", "2. "]
+    },
+    {
+        "id": 6,
+        "Title": "Day-of-Logistics",
+        "Rules": ["1.", "2. "]
+    }
+]
