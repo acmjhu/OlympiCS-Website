@@ -9,9 +9,20 @@ const placeholderTeams: Team[] = [
   { id: 2, name: "Team Bob", score: 8 },
   { id: 3, name: "Team Alice", score: 5 },
   { id: 4, name: "Team Sally", score: 3 },
-  { id: 5, name: "Team Jim", score: 1 },
+  { id: 5, name: "Team Jim", score: 0 },
 ];
+// Put this above TeamRow
+interface EmptyStateProps {
+  message: string;
+}
 
+function EmptyState({ message }: EmptyStateProps) {
+  return (
+    <div className="text-center py-20 text-gray-500">
+      <p className="text-xl font-medium">{message}</p>
+    </div>
+  );
+}
 interface TeamRowProps {
   team: Team;
   rank: number | null;
@@ -43,6 +54,9 @@ function TeamRow({ team, rank }: TeamRowProps) {
     3: "🥉",
   };
 
+  const hasTeams = placeholderTeams.length > 0;
+  const hasScores = placeholderTeams.some((t) => t.score > 0);
+  //if null (all teams have 0 points at the start of the game) make the text darker and less strong. Otherwise handle normally
   const textColor = rank ? medalText[rank] ?? "text-gray-400" : "text-gray-600";
   const borderColor = rank
     ? medalBorder[rank] ?? "border-gray-700"
@@ -94,33 +108,38 @@ function TeamRow({ team, rank }: TeamRowProps) {
 }
 
 export default function ScoreboardPage() {
-  //make sure the teams are in order of rank
+  //Calculate rank and make sure the teams are in order of rank
   const sortedTeams = [...placeholderTeams].sort((a, b) => b.score - a.score);
-  // Calculate real ranks accounting for ties
   const teamsWithRank = sortedTeams.map((team, index, array) => {
-    // Edge case: score is 0, no rank
-    if (team.score === 0) return { ...team, rank: null };
-
-    // Find how many teams above this one have a higher score
-    // That determines the true rank
+    //calculate the score
     const rank = array.findIndex((t) => t.score === team.score) + 1;
-
     return { ...team, rank };
   });
-
+  const hasTeams = placeholderTeams.length > 0;
+  const hasScores = placeholderTeams.some((t) => t.score > 0);
   return (
     <main className="min-h-screen bg-gray-950 text-white px-4 py-12">
       {/* Header */}
       <header className="text-center mb-10">
-        <h1 className="text-5xl font-black tracking-tight">Live Leaderboard</h1>
+        <h1 className="text-5xl font-black tracking-tight">
+          OlympiCS 5/1/26 Live Leaderboard
+        </h1>
       </header>
 
       {/* Leaderboard */}
-      <section className="text-2xl text-center max-w-2xl mx-auto flex flex-col gap-3">
-        {teamsWithRank.map((team) => (
-          <TeamRow key={team.id} team={team} rank={team.rank} />
-        ))}
-      </section>
+
+      {/* Handles no scores yet (show "Scoreboard will be available on event day"), no teams accepted yet*/}
+      {!hasTeams ? (
+        <EmptyState message="No teams have been accepted yet." />
+      ) : !hasScores ? (
+        <EmptyState message="Scoreboard will be available on event day." />
+      ) : (
+        <section className="text-2xl text-center max-w-2xl mx-auto flex flex-col gap-3">
+          {teamsWithRank.map((team) => (
+            <TeamRow key={team.id} team={team} rank={team.rank} />
+          ))}
+        </section>
+      )}
     </main>
   );
 }
