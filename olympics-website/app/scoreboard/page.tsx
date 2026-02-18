@@ -1,15 +1,67 @@
 interface Team {
   id: number;
   name: string;
+  scores: Record<string, number>;
+
   score: number;
 }
 
 const placeholderTeams: Team[] = [
-  { id: 1, name: "Manuel and Friends", score: 10 },
-  { id: 2, name: "Team Bob", score: 8 },
-  { id: 3, name: "Team Alice", score: 5 },
-  { id: 4, name: "Team Sally", score: 3 },
-  { id: 5, name: "Team Jim", score: 0 },
+  {
+    id: 1,
+    name: "Manuel and Friends",
+    scores: {
+      Charrades: 2,
+      Dance: 2,
+      Jokes: 3,
+      ScavengerHunt: 3,
+    },
+    score: 10,
+  },
+  {
+    id: 2,
+    name: "Team Bob",
+    scores: {
+      Charrades: 2,
+      Dance: 2,
+      Jokes: 2,
+      ScavengerHunt: 2,
+    },
+    score: 8,
+  },
+  {
+    id: 3,
+    name: "Team Alice",
+    scores: {
+      Charrades: 1,
+      Dance: 1,
+      Jokes: 1,
+      ScavengerHunt: 2,
+    },
+    score: 5,
+  },
+  {
+    id: 4,
+    name: "Team Sally",
+    scores: {
+      Charrades: 1,
+      Dance: 1,
+      Jokes: 0,
+      ScavengerHunt: 1,
+    },
+    score: 3,
+  },
+  {
+    id: 5,
+    name: "Team Jim",
+    scores: {
+      Charrades: 0,
+      Dance: 0,
+      Jokes: 0,
+      ScavengerHunt: 0,
+    },
+    score: 0,
+  },
 ];
 // Put this above TeamRow
 interface EmptyStateProps {
@@ -43,9 +95,9 @@ function TeamRow({ team, rank }: TeamRowProps) {
   };
 
   const medalGlow: Record<number, string> = {
-    1: "shadow-[0_0_15px_rgba(250,204,21,0.4)]",
-    2: "shadow-[0_0_15px_rgba(209,213,219,0.3)]",
-    3: "shadow-[0_0_15px_rgba(251,146,60,0.4)]",
+    1: "shadow-[0_0_15px_rgba(250,204,21,0.6)]",
+    2: "shadow-[0_0_15px_rgba(209,213,219,0.5)]",
+    3: "shadow-[0_0_15px_rgba(251,146,60,0.6)]",
   };
 
   const medalEmoji: Record<number, string> = {
@@ -121,9 +173,9 @@ export default function ScoreboardPage() {
     <main className="min-h-screen bg-gray-950 text-white px-4 py-12">
       {/* Header */}
       <header className="text-center mb-10">
-        <h1 className="text-5xl font-black tracking-tight">
-          OlympiCS 5/1/26 Live Leaderboard
-        </h1>
+        <h1 className="text-5xl font-black tracking-tight">OlympiCS</h1>
+        <h2 className="text-3xl font-black tracking-tight py-4">5/5/26</h2>
+        <h3 className="text-4xl font-black tracking-tight">Live Leaderboard</h3>
       </header>
 
       {/* Leaderboard */}
