@@ -1,32 +1,69 @@
-[
+{
+  "sections": [
     {
-        "id": 1,
-        "Title": "General Rules",
-        "Rules": ["1.", "2. "]
+      "id": "general-rules",
+      "title": "General Rules",
+      "rules": [
+        "b",
+        "a"
+      ]
     },
     {
-        "id": 2,
-        "Title": "Team Rules",
-        "Rules": ["1.", "2. "]
+      "id": "team-rules",
+      "title": "Team Rules",
+      "rules": [
+        "a",
+        "b"
+      ]
     },
     {
-        "id": 3,
-        "Title": "Scoring",
-        "Rules": ["1.", "2. "]
+      "id": "scoring",
+      "title": "Scoring System",
+      "rules": [
+        "a",
+        "b"
+      ]
     },
     {
-        "id": 4,
-        "Title": "Scoring",
-        "Rules": ["1.", "2. "]
+      "id": "code-of-conduct",
+      "title": "Code of Conduct",
+      "rules": [
+        "a",
+        "b"
+      ]
     },
     {
-        "id": 5,
-        "Title": "Code of Conduct",
-        "Rules": ["1.", "2. "]
+      "id": "technical-requirements",
+      "title": "Technical Requirements",
+      "rules": [
+        "a",
+        "b"
+      ]
     },
     {
-        "id": 6,
-        "Title": "Day-of-Logistics",
-        "Rules": ["1.", "2. "]
+      "id": "day-of-logistics",
+      "title": "Day-of Logistics",
+      "rules": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "prizes-awards",
+      "title": "Prizes & Awards",
+      "rules": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "contact-support",
+      "title": "Contact & Support",
+      "rules": [
+        "a",
+        "b"
+      ]
     }
-]
+  ],
+  "lastUpdated": "2026-02-21"
+}
