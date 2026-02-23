@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 interface Team {
   id: number;
   name: string;
@@ -63,7 +67,6 @@ const placeholderTeams: Team[] = [
     score: 0,
   },
 ];
-// Put this above TeamRow
 interface EmptyStateProps {
   message: string;
 }
@@ -160,6 +163,8 @@ function TeamRow({ team, rank }: TeamRowProps) {
 }
 
 export default function ScoreboardPage() {
+  const [view, setView] = useState<"leaderboard" | "grid">("leaderboard");
+
   //Calculate rank and make sure the teams are in order of rank
   const sortedTeams = [...placeholderTeams].sort((a, b) => b.score - a.score);
   const teamsWithRank = sortedTeams.map((team, index, array) => {
@@ -170,16 +175,18 @@ export default function ScoreboardPage() {
   const hasTeams = placeholderTeams.length > 0;
   const hasScores = placeholderTeams.some((t) => t.score > 0);
   return (
-    <main className="min-h-screen bg-gray-950 text-white px-4 py-12">
+    <main
+      className="min-h-screen text-white px-4 py-12"
+      style={{ backgroundColor: "#002D72" }} //Took a look at styling and I think we need it to be this JHU heritage blue
+    >
       {/* Header */}
       <header className="text-center mb-10">
         <h1 className="text-5xl font-black tracking-tight">OlympiCS</h1>
-        <h2 className="text-3xl font-black tracking-tight py-4">5/5/26</h2>
+        <h2 className="text-4xl font-black tracking-tight py-4">5/5/26</h2>
         <h3 className="text-4xl font-black tracking-tight">Live Leaderboard</h3>
       </header>
 
       {/* Leaderboard */}
-
       {/* Handles no scores yet (show "Scoreboard will be available on event day"), no teams accepted yet*/}
       {!hasTeams ? (
         <EmptyState message="No teams have been accepted yet." />
