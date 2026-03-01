@@ -44,6 +44,7 @@ const placeholderTeams: Team[] = [
   },
 ];
 
+//TODO migrate all of these components to the component folder
 function EmptyState({ message }: { message: string }) {
   return (
     <div className="text-center py-20 text-gray-500">
@@ -129,7 +130,7 @@ function ScoreGrid({ teams }: { teams: (Team & { rank: number })[] }) {
 
   return (
     <>
-      {/* ── Mobile: one card per team ── */}
+      {/*Mobile display*/}
       <div className="flex flex-col gap-3 px-4 md:hidden">
         {teams.map((team) => {
           const nameColor = medalText[team.rank] ?? "text-gray-300";
@@ -184,7 +185,7 @@ function ScoreGrid({ teams }: { teams: (Team & { rank: number })[] }) {
         })}
       </div>
 
-      {/* ── Desktop: full grid table ── */}
+      {/*LAptop display*/}
       <div className="hidden md:block mx-12 overflow-x-auto">
         <div
           className="min-w-fit"
