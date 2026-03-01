@@ -172,7 +172,7 @@ function ScoreGrid({ teams }: { teams: (Team & { rank: number })[] }) {
                           isEventWinner ? "text-yellow-300" : "text-gray-300"
                         }`}
                       >
-                        {val}
+                        {val > 0 ? val : "—"}
                         {isEventWinner && " ★"}
                       </span>
                     </div>
@@ -246,7 +246,7 @@ function ScoreGrid({ teams }: { teams: (Team & { rank: number })[] }) {
                           : "text-gray-400"
                       }`}
                     >
-                      {val}
+                      {val > 0 ? val : "—"}
                       {isEventWinner && <span className="ml-1 text-xs">★</span>}
                     </div>
                   );
