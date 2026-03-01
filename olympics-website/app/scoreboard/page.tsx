@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+const heritageBlue = "#002D72";
+
 interface Team {
   id: number;
   name: string;
@@ -67,6 +69,7 @@ const placeholderTeams: Team[] = [
     score: 0,
   },
 ];
+
 interface EmptyStateProps {
   message: string;
 }
@@ -99,8 +102,8 @@ function TeamRow({ team, rank }: TeamRowProps) {
 
   const medalGlow: Record<number, string> = {
     1: "shadow-[0_0_15px_rgba(250,204,21,0.6)]",
-    2: "shadow-[0_0_15px_rgba(209,213,219,0.5)]",
-    3: "shadow-[0_0_15px_rgba(251,146,60,0.6)]",
+    2: "shadow-[0_0_10px_rgba(209,213,219,0.5)]",
+    3: "shadow-[0_0_10px_rgba(251,146,60,0.4)]",
   };
 
   const medalEmoji: Record<number, string> = {
@@ -163,7 +166,8 @@ function TeamRow({ team, rank }: TeamRowProps) {
 }
 
 export default function ScoreboardPage() {
-  const [view, setView] = useState<"leaderboard" | "grid">("leaderboard");
+  const [view, setView] = useState("leaderboard");
+  const [activeTab, setActiveTab] = useState("1");
 
   //Calculate rank and make sure the teams are in order of rank
   const sortedTeams = [...placeholderTeams].sort((a, b) => b.score - a.score);
@@ -175,29 +179,52 @@ export default function ScoreboardPage() {
   const hasTeams = placeholderTeams.length > 0;
   const hasScores = placeholderTeams.some((t) => t.score > 0);
   return (
-    <main
-      className="min-h-screen text-white px-4 py-12"
-      style={{ backgroundColor: "#002D72" }} //Took a look at styling and I think we need it to be this JHU heritage blue
-    >
+    <main className="min-h-screen text-white px-4 py-12 bg-gray-900">
       {/* Header */}
       <header className="text-center mb-10">
         <h1 className="text-5xl font-black tracking-tight">OlympiCS</h1>
         <h2 className="text-4xl font-black tracking-tight py-4">5/5/26</h2>
         <h3 className="text-4xl font-black tracking-tight">Live Leaderboard</h3>
       </header>
-
+      <button
+        className="flex mx-auto border px-4 py-1 rounded-lg mt-3 mb-5"
+        onClick={() => setView(view === "leaderboard" ? "grid" : "leaderboard")}
+      >
+        {view === "leaderboard" ? "View Grid" : "View Leaderboard"}
+      </button>
       {/* Leaderboard */}
       {/* Handles no scores yet (show "Scoreboard will be available on event day"), no teams accepted yet*/}
-      {!hasTeams ? (
-        <EmptyState message="No teams have been accepted yet." />
-      ) : !hasScores ? (
-        <EmptyState message="Scoreboard will be available on event day." />
-      ) : (
-        <section className="text-2xl text-center max-w-2xl mx-auto flex flex-col gap-3">
-          {teamsWithRank.map((team) => (
-            <TeamRow key={team.id} team={team} rank={team.rank} />
-          ))}
-        </section>
+      {view === "leaderboard" && (
+        <div>
+          {!hasTeams ? (
+            <EmptyState message="No teams have been accepted yet." />
+          ) : !hasScores ? (
+            <EmptyState message="Scoreboard will be available on event day." />
+          ) : (
+            <section className="text-2xl text-center max-w-2xl mx-auto flex flex-col gap-3">
+              {teamsWithRank.map((team) => (
+                <TeamRow key={team.id} team={team} rank={team.rank} />
+              ))}
+            </section>
+          )}
+        </div>
+      )}
+
+      {view === "grid" && (
+        <div
+          className={`grid grid-cols-${
+            Object.keys(placeholderTeams[0].scores).length
+          } grid-rows-${placeholderTeams.length} gap-px bg-gray-400 p-px mx-12`}
+        >
+          <div className="bg-white p-4">01</div>
+          <div className="bg-white p-4">02</div>
+          <div className="bg-white p-4">03</div>
+          <div className="bg-white p-4">04</div>
+          <div className="bg-white p-4">05</div>
+          <div className="bg-white p-4">06</div>
+          <div className="bg-white p-4">07</div>
+          <div className="bg-white p-4">08</div>
+        </div>
       )}
     </main>
   );
