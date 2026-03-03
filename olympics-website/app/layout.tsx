@@ -33,6 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${silkScreen.variable}`}>
       <body className="antialiased">
+        <Navbar/>
         {children}
         <Footer />
       </body>
