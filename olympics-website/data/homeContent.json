@@ -1,0 +1,10 @@
+{
+    "event_name" : "2026 OlympiCS",
+    "tagline" : "tagline",
+    "short_desc" : "short description",
+    "date" : "mm/dd/yy",
+    "location" : "location",
+    "highlights" : [
+        "Highlight1", "higlight2"
+    ]
+}
