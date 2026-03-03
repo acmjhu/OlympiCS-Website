@@ -1,0 +1,27 @@
+{
+    "placeholderEventId": {
+        "teams": {
+            "firstTeamName": "placeholderFirstTeamName",
+            "firstMembers": [
+                "Name1A",
+                "Name1B",
+                "Name1C",
+                "Name1D"
+            ],
+            "secondTeamName": "placeholderSecondTeamName",
+            "secondMembers": [
+                "Name2A",
+                "Name2B",
+                "Name2C",
+                "Name2D"
+            ],
+            "thirdTeamName": "placeholderThirdTeamName",
+            "thirdMembers": [
+                "Name3A",
+                "Name3B",
+                "Name3C",
+                "Name3D"
+            ]
+        }
+    }
+}

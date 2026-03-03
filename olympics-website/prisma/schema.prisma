@@ -1,0 +1,92 @@
+
+model User {
+  id                  Int              @id @default(autoincrement())
+  email               String           @unique
+  firstName           String
+  lastName            String
+  tShirtSize          TShirtSize?
+  dietaryRestrictions String?
+  teamMemberships     TeamMembership[]
+}
+
+model Game {
+  id          Int          @id @default(autoincrement())
+  name        String
+  description String?
+  eventGames  EventGames[]
+}
+
+model Event {
+  id         Int          @id @default(autoincrement())
+  name       String
+  year       Int
+  teams      Team[]
+  eventGames EventGames[]
+}
+
+model Team {
+  id              Int              @id @default(autoincrement())
+  name            String
+  event           Event            @relation(fields: [eventId], references: [id])
+  eventId         Int
+  code            String           @unique
+  status          TeamStatus       @default(PENDING)
+  openToMembers   Boolean          @default(true)
+  teamMemberships TeamMembership[]
+  scores          Score[]
+}
+
+model TeamMembership {
+  id        Int     @id @default(autoincrement())
+  team      Team    @relation(fields: [teamId], references: [id])
+  teamId    Int
+  user      User    @relation(fields: [userId], references: [id])
+  userId    Int
+  isCaptain Boolean @default(false)
+}
+
+model EventGames {
+  id      Int     @id @default(autoincrement())
+  event   Event   @relation(fields: [eventId], references: [id])
+  eventId Int
+  game    Game    @relation(fields: [gameId], references: [id])
+  gameId  Int
+  order   Int
+  scores  Score[]
+}
+
+model Score {
+  id           Int        @id @default(autoincrement())
+  eventGames   EventGames @relation(fields: [eventGamesId], references: [id])
+  eventGamesId Int
+  score        Float
+  team         Team       @relation(fields: [teamId], references: [id])
+  teamId       Int
+}
+
+
+enum TeamStatus {
+  PENDING
+  DELETED
+  ACCEPTED
+  DISQUALIFIED
+  DNS
+}
+
+enum TShirtSize {
+  XS
+  S
+  M
+  L
+  XL
+  XXL
+}
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
