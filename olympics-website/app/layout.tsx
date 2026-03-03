@@ -32,12 +32,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased ${silkScreen.variable}`}>
-        <Providers>
-          <Navbar />
-          {children}
-        </Providers>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${silkScreen.variable}`}>
+      <body className="antialiased">
+        {children}
         <Footer />
       </body>
     </html>
