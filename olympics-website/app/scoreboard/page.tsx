@@ -59,8 +59,8 @@ export default function ScoreboardPage() {
       {/* Header */}
       <header className="text-center mb-10">
         <h1 className="text-5xl font-black tracking-tight">OlympiCS</h1>
-        <h2 className="text-4xl font-black tracking-tight py-4">5/5/26</h2>
-        <h3 className="text-4xl font-black tracking-tight">Live Leaderboard</h3>
+        <h1 className="text-4xl font-black tracking-tight py-4">5/5/26</h1  >
+        <h1 className="text-4xl font-black tracking-tight">Live Leaderboard</h1>
       </header>
 
       {/* Toggle button */}
