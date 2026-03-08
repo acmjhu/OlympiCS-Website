@@ -11,7 +11,10 @@
   "dependencies": {
     "@headlessui/react": "^2.2.9",
     "@heroicons/react": "^2.2.0",
+    "autoprefixer": "^10.4.27",
+    "lucide-react": "^0.577.0",
     "next": "16.1.6",
+    "postcss": "^8.5.8",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
@@ -23,7 +26,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "prisma": "^7.4.0",
-    "tailwindcss": "^4",
+    "tailwindcss": "^4.2.1",
     "typescript": "^5"
   }
 }
