@@ -1,7 +1,17 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaNeonHttp } from '@prisma/adapter-neon'
+import { PrismaClient } from '@/app/generated/prisma/client'
+
 const prismaClientSingleton = () => {
-    return new PrismaClient()
+
+    const databaseUrl = process.env.DATABASE_URL
+    if (!databaseUrl) {
+        throw new Error('DATABASE_URL environment variable is not set or is empty. Please configure it before starting the application.');
+    }
+
+    const adapter = new PrismaNeonHttp(databaseUrl, {});
+    return new PrismaClient({ adapter });
 }
+
 declare global {
     var prismaGlobal: undefined | ReturnType<typeof prismaClientSingleton>
 }
