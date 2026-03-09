@@ -26,6 +26,7 @@ importers:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       '@prisma/client-runtime-utils':
         specifier: ^7.6.0
         version: 7.6.0
@@ -37,12 +38,19 @@ importers:
 >>>>>>> 12fd0a2 (json driven event timeline, mobile sync valid #6 (#27))
 =======
 >>>>>>> 1b1a997 (UI enhanced)
+=======
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> de49851 (json driven event timeline, mobile sync valid #6 (#27))
+>>>>>>> b791c36 (json driven event timeline, mobile sync valid #6 (#27))
       bcryptjs:
         specifier: ^3.0.3
         version: 3.0.3
       lucide-react:
         specifier: ^0.577.0
         version: 0.577.0(react@19.2.3)
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 
@@ -53,13 +61,22 @@ importers:
 >>>>>>> e88057e (updated)
 =======
 =======
+=======
+=======
+>>>>>>> c611fd3 (Fix Prisma Issue (#28))
+>>>>>>> b791c36 (json driven event timeline, mobile sync valid #6 (#27))
+=======
       lucide-react:
         specifier: ^0.577.0
         version: 0.577.0(react@19.2.3)
 >>>>>>> c373418 (json driven event timeline, mobile sync valid #6 (#27))
+<<<<<<< HEAD
 >>>>>>> 12fd0a2 (json driven event timeline, mobile sync valid #6 (#27))
 =======
 >>>>>>> 1b1a997 (UI enhanced)
+=======
+>>>>>>> de49851 (json driven event timeline, mobile sync valid #6 (#27))
+>>>>>>> b791c36 (json driven event timeline, mobile sync valid #6 (#27))
       next:
         specifier: 16.1.6
         version: 16.1.6(@babel/core@7.29.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -1885,6 +1902,7 @@ packages:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> c373418 (json driven event timeline, mobile sync valid #6 (#27))
@@ -1896,11 +1914,27 @@ packages:
 >>>>>>> 12fd0a2 (json driven event timeline, mobile sync valid #6 (#27))
 =======
 >>>>>>> 1b1a997 (UI enhanced)
+=======
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c373418 (json driven event timeline, mobile sync valid #6 (#27))
+>>>>>>> de49851 (json driven event timeline, mobile sync valid #6 (#27))
+>>>>>>> b791c36 (json driven event timeline, mobile sync valid #6 (#27))
   lucide-react@0.577.0:
     resolution: {integrity: sha512-4LjoFv2eEPwYDPg/CUdBJQSDfPyzXCRrVW1X7jrx/trgxnxkHFjnVZINbzvzxjN70dxychOfg+FTYwBiS3pQ5A==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> c611fd3 (Fix Prisma Issue (#28))
+=======
+>>>>>>> c373418 (json driven event timeline, mobile sync valid #6 (#27))
+>>>>>>> de49851 (json driven event timeline, mobile sync valid #6 (#27))
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
 
@@ -4433,6 +4467,16 @@ snapshots:
     dependencies:
       react: 19.2.3
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+  lru.min@1.1.4: {}
+
+>>>>>>> c611fd3 (Fix Prisma Issue (#28))
+=======
+>>>>>>> c373418 (json driven event timeline, mobile sync valid #6 (#27))
+>>>>>>> de49851 (json driven event timeline, mobile sync valid #6 (#27))
   magic-string@0.30.21:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
