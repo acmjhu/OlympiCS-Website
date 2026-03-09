@@ -2,6 +2,7 @@
   {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "time": "09:00 AM",
     "event": "Check-in & Registration",
     "location": "Main Lobby",
@@ -10,6 +11,8 @@
 <<<<<<< HEAD
 =======
 >>>>>>> 2c55fc7 (Add CI (#32))
+=======
+>>>>>>> 76df9d1 (json driven event timeline, mobile sync valid #6 (#27))
     "time": "10:00 AM - 11:00 AM",
     "event": "Check-in",
     "description": "✅ Arrive and check your team in. ✅",
@@ -100,4 +103,36 @@
 =======
   
 >>>>>>> 8fd6afb (Add Initial CI (#31))
+<<<<<<< HEAD
 >>>>>>> f9de94a (Add Initial CI (#31))
+=======
+=======
+    "time": "09:00 AM",
+    "event": "Check-in & Registration",
+    "location": "Main Lobby",
+    "description": "Pick up your badges and welcome kits.",
+    "type": "ceremony"
+  },
+  {
+      "time": "09:30 AM",
+      "event": "Opening Ceremony",
+      "description": "Introduction and description of competition.",
+      "type": "ceremony"
+  },
+  {
+    "time": "10:00 AM",
+    "event": "Round 1: Algorithm Relay",
+    "location": "Lab A",
+    "description": "High-speed competitive programming in teams.",
+    "type": "competition"
+  },
+  {
+    "time": "12:30 PM",
+    "event": "Catered Lunch",
+    "location": "Cafeteria",
+    "description": "Vegetarian and Vegan options available.",
+    "type": "break"
+  }
+]
+>>>>>>> 43c9e6c (json driven event timeline, mobile sync valid #6 (#27))
+>>>>>>> 76df9d1 (json driven event timeline, mobile sync valid #6 (#27))
