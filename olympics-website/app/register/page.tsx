@@ -2,12 +2,17 @@
 "use client";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { useState } from "react";
 import {registerUser} from "./actions";
 =======
 // import { useState } from "react";
 // import {registerUser} from "./actions";
 >>>>>>> ec8d0a9 (Registration Page Update (#40))
+=======
+import { useState } from "react";
+import {registerUser} from "./actions";
+>>>>>>> 14543a7 (started issue 9 stuff)
 
 /*
 * Formerly Used Code, no longer used due to changes. 
