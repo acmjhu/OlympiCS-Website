@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import EmptyState from "@/components/scoreboard/EmptyState";
 import TeamRow from "@/components/scoreboard/TeamRow";
 import ScoreGrid from "@/components/scoreboard/ScoreGrid";
+import CoolBackgroundGlow from "@/components/scoreboard/CoolBackgroundGlow";
 const heritageBlue = "#002D72";
 
 const placeholderTeams: Team[] = [
@@ -55,11 +56,13 @@ export default function ScoreboardPage() {
   const hasScores = placeholderTeams.some((t) => t.score > 0);
 
   return (
-    <main className="min-h-screen text-white px-4 py-12 bg-gray-900">
+    <main className="relative min-h-screen text-white px-4 py-12 bg-gray-900 z-50">
+      {/*Michelle background*/}
+      <CoolBackgroundGlow />
       {/* Header */}
       <header className="text-center mb-10">
         <h1 className="text-5xl font-black tracking-tight">OlympiCS</h1>
-        <h1 className="text-4xl font-black tracking-tight py-4">5/5/26</h1  >
+        <h1 className="text-4xl font-black tracking-tight py-4">5/5/26</h1>
         <h1 className="text-4xl font-black tracking-tight">Live Leaderboard</h1>
       </header>
 
