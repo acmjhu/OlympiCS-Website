@@ -1,8 +1,8 @@
 // register
 "use client";
 
-// import { useState } from "react";
-// import {registerUser} from "./actions";
+import { useState } from "react";
+import {registerUser} from "./actions";
 
 /*
 * Formerly Used Code, no longer used due to changes. 
@@ -44,6 +44,7 @@ import links from "@/data/links.json";
 
 
 export default function registerPage() {
+  const [error, setError] = useState<string | null>(null);
   return (
     // Added 'relative isolate', 'overflow-hidden', and 'bg-gray-900' to match the Home page
     <div className="relative isolate overflow-hidden bg-gray-900 flex flex-col items-center justify-center min-h-screen gap-4">
@@ -76,5 +77,6 @@ export default function registerPage() {
         Register
       </a>
     </div>
+    
   );
 }
