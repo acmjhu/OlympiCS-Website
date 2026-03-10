@@ -10,6 +10,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 097c9fd (Add CI (#33))
     defaults:
       run:
         working-directory: olympics-website
@@ -38,6 +41,7 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 =======
           cache: 'npm'
+          cache-dependency-path: olympics-website/package-lock.json
       - run: npm ci
       - run: npm run build
 >>>>>>> c726e6c (Add CI (#32))
