@@ -1,12 +1,15 @@
 [
   {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "time": "09:00 AM",
     "event": "Check-in & Registration",
     "location": "Main Lobby",
     "description": "Pick up your badges and welcome kits.",
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> 2c55fc7 (Add CI (#32))
     "time": "10:00 AM - 11:00 AM",
     "event": "Check-in",
     "description": "✅ Arrive and check your team in. ✅",
@@ -36,6 +39,7 @@
     "time": "12:30 PM - 1:30 PM",
     "event": "Lunch",
     "description": "🍕 Fuel up for the next 2 games! 🍕",
+<<<<<<< HEAD
 =======
     "time": "10:30 AM",
     "event": "Check-in",
@@ -84,6 +88,8 @@
     "description": "Thank you for participating! We hope to see you again next year.",
 >>>>>>> 8fd6afb (Add Initial CI (#31))
 >>>>>>> f9de94a (Add Initial CI (#31))
+=======
+>>>>>>> 2c55fc7 (Add CI (#32))
     "type": "break"
   }
 ]

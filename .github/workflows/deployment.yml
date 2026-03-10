@@ -9,6 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+<<<<<<< HEAD
     defaults:
       run:
         working-directory: olympics-website
@@ -19,13 +20,24 @@ jobs:
         uses: pnpm/action-setup@v3
         with:
           version: 9
+=======
+
+    steps:
+      - uses: actions/checkout@v4
+>>>>>>> c726e6c (Add CI (#32))
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+<<<<<<< HEAD
           cache: 'pnpm'
           cache-dependency-path: olympics-website/pnpm-lock.yaml
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+=======
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build
+>>>>>>> c726e6c (Add CI (#32))
