@@ -46,7 +46,7 @@ export default function ScoreboardPage() {
   const hasScores = teams.some((t) => t.score > 0);
 
   return (
-    <main className="relative min-h-screen text-white px-4 py-12 bg-gray-900 z-50">
+    <main className="relative min-h-screen text-white px-4 py-12 bg-[#050d1a]">
       {/*Michelle background*/}
       <CoolBackgroundGlow />
 
