@@ -4,7 +4,8 @@ import rulesData from '@/data/rules.json';
 export const metadata: Metadata = {
   title: 'Rules & Guidelines | OlympiCS',
   description: 'Official rules, guidelines, and logistics for the JHU OlympiCS programming competition',
-};
+}; 
+//a
 
 export default function RulesPage() {
   const { sections, lastUpdated } = rulesData;
