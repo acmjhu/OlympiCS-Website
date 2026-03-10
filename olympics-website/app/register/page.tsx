@@ -44,15 +44,36 @@ export default function registerPage() {
 
 export default function registerPage() {
   return (
-  <div className="flex flex-col items-center justify-center min-h-screen gap-4">
-  <span className="text-4xl text-center">Register Using the Link Below:</span> 
-  <a id="youtube-link"  // currently goes to youtube as a placeholder to make sure the link works
-     href="https://www.youtube.com" 
-     target="_blank" 
-     rel="noopener noreferrer" 
-     className="text-blue-600 font-bold hover:underline text-3xl">
-     Register
-  </a>
-  </div>
+    // Added 'relative isolate', 'overflow-hidden', and 'bg-gray-900' to match the Home page
+    <div className="relative isolate overflow-hidden bg-gray-900 flex flex-col items-center justify-center min-h-screen gap-4">
+      
+      {/* Decorative background shapes (Copied from Home) */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+      >
+        <div
+          style={{
+            clipPath:
+              'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+          }}
+          className="relative left-1/2 aspect-[1155/678] w-[36rem] -translate-x-1/2 rotate-30 bg-gradient-to-bl from-[#68ACE5] to-[#002D72] opacity-50 sm:left-1/2 sm:w-[72rem]"
+        />
+      </div>
+
+      {/* Your Content */}
+      <span className="text-4xl text-center text-white font-bold">
+        Register Using the Link Below:
+      </span> 
+      <a 
+        id="youtube-link"
+        href="https://www.youtube.com" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="text-indigo-400 font-bold hover:text-indigo-300 hover:underline text-3xl transition-colors"
+      >
+        Register
+      </a>
+    </div>
   );
 }

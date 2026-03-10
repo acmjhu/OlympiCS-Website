@@ -1,7 +1,6 @@
 "use server";
 
 // app/register/actions.ts
-// ! No longer needed due to admin changes
 
 
 import  prisma  from "@/lib/prisma";
