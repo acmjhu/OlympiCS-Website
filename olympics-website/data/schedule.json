@@ -1,22 +1,26 @@
 [
   {
-    "time": "09:00 AM",
-    "event": "Check-in & Registration",
-    "location": "Main Lobby",
-    "description": "Pick up your badges and welcome kits.",
+    "time": "10:30 AM",
+    "event": "Check-in",
+    "description": "Arrive and check your team in",
     "type": "ceremony"
   },
   {
-      "time": "09:30 AM",
+      "time": "11:00 AM",
       "event": "Opening Ceremony",
       "description": "Introduction and description of competition.",
       "type": "ceremony"
   },
   {
-    "time": "10:00 AM",
-    "event": "Round 1: Algorithm Relay",
-    "location": "Lab A",
-    "description": "High-speed competitive programming in teams.",
+    "time": "11:05 AM",
+    "event": "Round 1: Pictionary",
+    "description": "Round-robin styled pictionary tournament. See rules for more details.",
+    "type": "competition"
+  },
+  {
+    "time": "11:45 AM",
+    "event": "Round 2: Code Telephone",
+    "description": "Traditional telephone game, but with code. See rules for more details.",
     "type": "competition"
   },
   {
