@@ -1,64 +1,55 @@
 "use client";
 
-//interface for team can change later
 import Team from "@/components/scoreboard/Team";
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import EmptyState from "@/components/scoreboard/EmptyState";
 import TeamRow from "@/components/scoreboard/TeamRow";
 import ScoreGrid from "@/components/scoreboard/ScoreGrid";
 import CoolBackgroundGlow from "@/components/scoreboard/CoolBackgroundGlow";
-const heritageBlue = "#002D72";
-
-const placeholderTeams: Team[] = [
-  {
-    id: 1,
-    name: "Manuel and Friends",
-    scores: { Charrades: 2, Dance: 2, Jokes: 3, ScavengerHunt: 3 },
-    score: 10,
-  },
-  {
-    id: 2,
-    name: "Team Bob",
-    scores: { Charrades: 2, Dance: 2, Jokes: 2, ScavengerHunt: 2 },
-    score: 8,
-  },
-  {
-    id: 3,
-    name: "Team Alice",
-    scores: { Charrades: 1, Dance: 1, Jokes: 1, ScavengerHunt: 2 },
-    score: 5,
-  },
-  {
-    id: 4,
-    name: "Team Sally",
-    scores: { Charrades: 1, Dance: 1, Jokes: 0, ScavengerHunt: 1 },
-    score: 3,
-  },
-  {
-    id: 5,
-    name: "Team Jim",
-    scores: { Charrades: 0, Dance: 0, Jokes: 0, ScavengerHunt: 0 },
-    score: 0,
-  },
-];
 
 export default function ScoreboardPage() {
   const [view, setView] = useState<"leaderboard" | "grid">("leaderboard");
+  const [teams, setTeams] = useState<Team[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const sortedTeams = [...placeholderTeams].sort((a, b) => b.score - a.score);
+  useEffect(() => {
+    fetch("/api/scoreboard")
+      .then((res) => res.json())
+      .then((data) => {
+        const mapped: Team[] = data.scoreboard.map(
+          (t: {
+            id: number;
+            name: string;
+            totalScore: number;
+            scores: { game: string; score: number }[];
+          }) => ({
+            id: t.id,
+            name: t.name,
+            score: t.totalScore,
+            scores: Object.fromEntries(t.scores.map((s) => [s.game, s.score])),
+          })
+        );
+        setTeams(mapped);
+      })
+      .catch(() => setError("Failed to load scoreboard."))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const sortedTeams = [...teams].sort((a, b) => b.score - a.score);
   const teamsWithRank = sortedTeams.map((team, _i, array) => ({
     ...team,
     rank: array.findIndex((t) => t.score === team.score) + 1,
   }));
 
-  const hasTeams = placeholderTeams.length > 0;
-  const hasScores = placeholderTeams.some((t) => t.score > 0);
+  const hasTeams = teams.length > 0;
+  const hasScores = teams.some((t) => t.score > 0);
 
   return (
-    <main className="relative min-h-screen text-white px-4 py-12 bg-gray-900 z-50">
+    <main className="relative min-h-screen text-white px-4 py-12 bg-[#050d1a]">
       {/*Michelle background*/}
       <CoolBackgroundGlow />
+
       {/* Header */}
       <header className="text-center mb-10">
         <h1 className="text-5xl font-black tracking-tight">OlympiCS</h1>
@@ -74,8 +65,14 @@ export default function ScoreboardPage() {
         {view === "leaderboard" ? "📊 View Grid" : "🏆 View Leaderboard"}
       </button>
 
+      {/* Loading / error states */}
+      {loading && (
+        <p className="text-center text-white/50">Loading scoreboard...</p>
+      )}
+      {error && <p className="text-center text-red-400">{error}</p>}
+
       {/* Leaderboard view */}
-      {view === "leaderboard" && (
+      {!loading && !error && view === "leaderboard" && (
         <div>
           {!hasTeams ? (
             <EmptyState message="No teams have been accepted yet." />
@@ -92,7 +89,7 @@ export default function ScoreboardPage() {
       )}
 
       {/* Grid view */}
-      {view === "grid" && (
+      {!loading && !error && view === "grid" && (
         <div>
           {!hasTeams ? (
             <EmptyState message="No teams have been accepted yet." />
