@@ -5,7 +5,7 @@ const prismaClientSingleton = () => {
 
     const databaseUrl = process.env.DATABASE_URL
     if (!databaseUrl) {
-        throw new Error('DATABASE_URL environment variable is not set or is empty. Please configure it before starting the application.');
+        return new PrismaClient()
     }
 
     const adapter = new PrismaNeonHttp(databaseUrl, {});
