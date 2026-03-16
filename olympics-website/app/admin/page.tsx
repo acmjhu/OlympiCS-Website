@@ -1,4 +1,6 @@
-import { prisma } from "@/app/generated/prisma";
+import { PrismaClient } from "../generated/prisma";
+
+const prisma = new PrismaClient();
 
 export default async function AdminPage() {
   const [userCount, teamCount, acceptedCount] = await Promise.all([
