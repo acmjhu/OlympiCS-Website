@@ -17,5 +17,5 @@ const handler: ProxyHandler<object> = {
     }
 }
 
-const prisma = new Proxy({} as PrismaClient, handler)
+const prisma = new Proxy({} as PrismaClient, handler) as PrismaClient
 export default prisma
