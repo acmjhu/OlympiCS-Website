@@ -12,8 +12,7 @@ jobs:
     defaults:
       run:
         working-directory: olympics-website
-    env:
-      DATABASE_URL: ${{ secrets.DATABASE_URL }} 
+
     steps:
       - uses: actions/checkout@v4
 
@@ -30,5 +29,8 @@ jobs:
           cache-dependency-path: pnpm-lock.yaml
 
       - run: pnpm install --frozen-lockfile
+
+      - name: Use dummy database for CI
+        run: echo 'DATABASE_URL="file:./dummy.db"' > .env
 
       - run: pnpm run build
