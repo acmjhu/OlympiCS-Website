@@ -26,6 +26,6 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: olympics-website/pnpm-lock.yaml
       - run: pnpm install --frozen-lockfile
+      - name: Create dummy .env file
+        run: echo 'DATABASE_URL="postgresql://dummy:dummy@localhost:5432/dummy"' > .env
       - run: pnpm run build
-        env:
-          DATABASE_URL: "postgresql://dummy:dummy@localhost:5432/dummy"
