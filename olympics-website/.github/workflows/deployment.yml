@@ -12,20 +12,23 @@ jobs:
     defaults:
       run:
         working-directory: olympics-website
-
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }} 
     steps:
       - uses: actions/checkout@v4
+
       - name: Install pnpm
         uses: pnpm/action-setup@v3
         with:
           version: 9
+
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'pnpm'
-          cache-dependency-path: olympics-website/pnpm-lock.yaml
+          cache-dependency-path: pnpm-lock.yaml
+
       - run: pnpm install --frozen-lockfile
-      - name: Inject OS-level DATABASE_URL
-        run: echo "DATABASE_URL=postgres://dummy:dummy@localhost:5432/dummy" >> $GITHUB_ENV
+
       - run: pnpm run build
