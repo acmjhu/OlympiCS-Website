@@ -31,6 +31,5 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       - name: Use dummy database for CI
-        run: echo 'DATABASE_URL="file:./dummy.db"' > .env
-
+        run: echo 'DATABASE_URL="postgresql://dummy:dummy@localhost/dummy"' > .env
       - run: pnpm run build
