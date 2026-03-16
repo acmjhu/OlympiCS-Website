@@ -5,7 +5,7 @@ const prismaClientSingleton = () => {
 
     const databaseUrl = process.env.DATABASE_URL
     if (!databaseUrl) {
-        return new PrismaClient()
+        return new PrismaClient({ adapter: null as any })
     }
 
     const adapter = new PrismaNeonHttp(databaseUrl, {});
