@@ -17,6 +17,7 @@ export default function Navbar() {
         {href: '/scoreboard', label: "Scoreboard"},
         {href: '/teams', label: "Teams"},
         {href: '/register', label: "Register"},
+        {href: '/history', label: "History"}
     ];
 
     const handleClick = () => {
