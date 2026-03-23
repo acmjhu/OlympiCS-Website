@@ -1,0 +1,69 @@
+{
+  "sections": [
+    {
+      "id": "general-rules",
+      "title": "General Rules",
+      "rules": [
+        "b",
+        "a"
+      ]
+    },
+    {
+      "id": "team-rules",
+      "title": "Team Rules",
+      "rules": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "scoring",
+      "title": "Scoring System",
+      "rules": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "code-of-conduct",
+      "title": "Code of Conduct",
+      "rules": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "technical-requirements",
+      "title": "Technical Requirements",
+      "rules": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "day-of-logistics",
+      "title": "Day-of Logistics",
+      "rules": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "prizes-awards",
+      "title": "Prizes & Awards",
+      "rules": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "contact-support",
+      "title": "Contact & Support",
+      "rules": [
+        "a",
+        "b"
+      ]
+    }
+  ],
+  "lastUpdated": "2026-02-21"
+}
