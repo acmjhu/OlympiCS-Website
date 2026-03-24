@@ -1,10 +1,12 @@
 // register
 "use client";
 
-import { useState } from "react";
-import {registerUser} from "./actions";
+// import { useState } from "react";
+// import {registerUser} from "./actions";
 
-
+/*
+* Formerly Used Code, no longer used due to changes. 
+* Non-styled menu 
 
 export default function registerPage() {
   const [error, setError] = useState<string | null>(null);
@@ -35,5 +37,22 @@ export default function registerPage() {
       
     </div>
     
+  );
+}
+*/
+
+
+export default function registerPage() {
+  return (
+  <div className="flex flex-col items-center justify-center min-h-screen gap-4">
+  <span className="text-4xl text-center">Register Using the Link Below:</span> 
+  <a id="youtube-link"  // currently goes to youtube as a placeholder to make sure the link works
+     href="https://www.youtube.com" 
+     target="_blank" 
+     rel="noopener noreferrer" 
+     className="text-blue-600 font-bold hover:underline text-3xl">
+     Register
+  </a>
+  </div>
   );
 }
