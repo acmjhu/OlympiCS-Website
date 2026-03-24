@@ -7,6 +7,7 @@ interface Game {
   id: number;
   name: string;
   description?: string;
+  pointValue?: number;
 }
 
 interface EventGame {
@@ -52,6 +53,7 @@ export default function AdminSettingsPage() {
                 id: 1,
                 name: 'Coding Challenge',
                 description: 'Teams compete to solve algorithmic problems',
+                pointValue: 100,
               },
             },
             {
@@ -61,6 +63,7 @@ export default function AdminSettingsPage() {
                 id: 2,
                 name: 'Web Development',
                 description: 'Build a web application with a time limit',
+                pointValue: 150,
               },
             },
             {
@@ -70,6 +73,7 @@ export default function AdminSettingsPage() {
                 id: 3,
                 name: 'Game Development',
                 description: 'Create a game in the given time frame',
+                pointValue: 200,
               },
             },
           ],
@@ -292,48 +296,61 @@ export default function AdminSettingsPage() {
         {/* Game Management Section */}
         <div className="bg-white rounded-lg shadow-md p-6">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">
-            Game Management
+            Games
           </h2>
 
           {event?.eventGames && event.eventGames.length > 0 ? (
-            <div className="space-y-4">
-              {event.eventGames.map((eg) => (
-                <div
-                  key={eg.id}
-                  className="flex items-start justify-between border rounded-lg p-4 hover:bg-gray-50 transition-colors"
-                >
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <span className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-blue-100 text-blue-700 font-semibold text-sm">
-                        {eg.order}
-                      </span>
-                      <h3 className="text-lg font-medium text-gray-900">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">Order</th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">Game Name</th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">Description</th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">Point Value</th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {event.eventGames.map((eg) => (
+                    <tr key={eg.id} className="hover:bg-gray-50 transition-colors">
+                      <td className="px-4 py-3">
+                        <span className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-blue-100 text-blue-700 font-semibold text-sm">
+                          {eg.order}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 text-sm font-medium text-gray-900">
                         {eg.game.name}
-                      </h3>
-                    </div>
-                    {eg.game.description && (
-                      <p className="text-gray-600 text-sm ml-11">
-                        {eg.game.description}
-                      </p>
-                    )}
-                  </div>
-                  <button className="text-gray-400 hover:text-gray-600 transition-colors p-2">
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              ))}
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-600">
+                        {eg.game.description || '-'}
+                      </td>
+                      <td className="px-4 py-3">
+                        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                          {eg.game.pointValue || 0} pts
+                        </span>
+                      </td>
+                      <td className="px-4 py-3">
+                        <button className="text-gray-400 hover:text-gray-600 transition-colors p-1">
+                          <svg
+                            className="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+                            />
+                          </svg>
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           ) : (
             <div className="text-center py-12">
