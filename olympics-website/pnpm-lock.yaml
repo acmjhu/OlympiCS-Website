@@ -160,7 +160,11 @@ packages:
 =======
   '@babel/runtime@7.29.2':
     resolution: {integrity: sha512-JiDShH45zKHWyGe4ZNVRrCjBz8Nh9TMmZG1kh4QTK8hCBTWBi8Da+i7s1fJw7/lYpM4ccepSNfqzZ/QvABBi5g==}
+<<<<<<< HEAD
 >>>>>>> 8fc9790 (spoddar2 set up NextAuth.js authentication (#26))
+=======
+>>>>>>> 8a0c7ec (spoddar2 set up NextAuth.js authentication (#26))
+>>>>>>> 40f3b89 (spoddar2 set up NextAuth.js authentication (#26))
     engines: {node: '>=6.9.0'}
 
   '@babel/template@7.28.6':
@@ -2612,7 +2616,11 @@ snapshots:
   '@babel/runtime@7.28.6': {}
 =======
   '@babel/runtime@7.29.2': {}
+<<<<<<< HEAD
 >>>>>>> 8fc9790 (spoddar2 set up NextAuth.js authentication (#26))
+=======
+>>>>>>> 8a0c7ec (spoddar2 set up NextAuth.js authentication (#26))
+>>>>>>> 40f3b89 (spoddar2 set up NextAuth.js authentication (#26))
 
   '@babel/template@7.28.6':
     dependencies:
@@ -4470,7 +4478,11 @@ snapshots:
       '@babel/runtime': 7.28.6
 =======
       '@babel/runtime': 7.29.2
+<<<<<<< HEAD
 >>>>>>> 8fc9790 (spoddar2 set up NextAuth.js authentication (#26))
+=======
+>>>>>>> 8a0c7ec (spoddar2 set up NextAuth.js authentication (#26))
+>>>>>>> 40f3b89 (spoddar2 set up NextAuth.js authentication (#26))
       '@panva/hkdf': 1.2.1
       cookie: 0.7.2
       jose: 4.15.9
