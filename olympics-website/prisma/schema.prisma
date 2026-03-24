@@ -99,11 +99,7 @@ datasource db {
 }
 
 model Account {
-<<<<<<< HEAD
   userId            Int
-=======
-  userId            String
->>>>>>> 05daeb4 (Create a sign-in page with an OAuth button)
   type              String
   provider          String
   providerAccountId String
