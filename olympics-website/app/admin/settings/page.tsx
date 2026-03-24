@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { Switch } from '@headlessui/react';
 
 interface Game {
   id: number;
@@ -25,6 +26,8 @@ interface Event {
 export default function AdminSettingsPage() {
   const [event, setEvent] = useState<Event | null>(null);
   const [loading, setLoading] = useState(true);
+  const [registrationEnabled, setRegistrationEnabled] = useState(true);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -66,6 +69,7 @@ export default function AdminSettingsPage() {
           ],
         };
         setEvent(mockEvent);
+        setRegistrationEnabled(mockEvent.registration ?? true);
       } catch (error) {
         console.error('Failed to fetch event:', error);
       } finally {
@@ -75,6 +79,25 @@ export default function AdminSettingsPage() {
 
     fetchEvent();
   }, []);
+
+  const handleRegistrationToggle = async (enabled: boolean) => {
+    setRegistrationEnabled(enabled);
+    setSaving(true);
+    try {
+      // Update the event registration flag
+      if (event) {
+        const updatedEvent = { ...event, registration: enabled };
+        setEvent(updatedEvent);
+      }
+      // In a real scenario, you would make an API call here
+      // await fetch(`/api/events/${event?.id}`, { method: 'PUT', body: JSON.stringify({ registration: enabled }) });
+    } catch (error) {
+      console.error('Failed to update registration:', error);
+      setRegistrationEnabled(!enabled);
+    } finally {
+      setSaving(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -130,22 +153,25 @@ export default function AdminSettingsPage() {
                     Team Registration
                   </h3>
                   <p className="text-sm text-gray-600 mt-1">
-                    {event?.registration
+                    {registrationEnabled
                       ? 'Registration is currently open. Teams can join the event.'
                       : 'Registration is currently closed. Teams cannot join the event.'}
                   </p>
                 </div>
-                <div className="flex items-center gap-3">
+                <Switch
+                  checked={registrationEnabled}
+                  onChange={handleRegistrationToggle}
+                  disabled={saving}
+                  className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors ${
+                    registrationEnabled ? 'bg-green-600' : 'bg-gray-300'
+                  } ${saving ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+                >
                   <span
-                    className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
-                      event?.registration
-                        ? 'bg-green-100 text-green-800'
-                        : 'bg-red-100 text-red-800'
+                    className={`inline-block h-6 w-6 transform rounded-full bg-white transition-transform ${
+                      registrationEnabled ? 'translate-x-7' : 'translate-x-1'
                     }`}
-                  >
-                    {event?.registration ? 'Open' : 'Closed'}
-                  </span>
-                </div>
+                  />
+                </Switch>
               </div>
             </div>
           </div>
