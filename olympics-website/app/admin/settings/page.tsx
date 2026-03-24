@@ -18,7 +18,8 @@ interface EventGame {
 interface Event {
   id: number;
   name: string;
-  year: number;
+  date?: string;
+  description?: string;
   registration?: boolean;
   eventGames?: EventGame[];
 }
@@ -28,6 +29,10 @@ export default function AdminSettingsPage() {
   const [loading, setLoading] = useState(true);
   const [registrationEnabled, setRegistrationEnabled] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [editName, setEditName] = useState('');
+  const [editDate, setEditDate] = useState('');
+  const [editDescription, setEditDescription] = useState('');
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -36,7 +41,8 @@ export default function AdminSettingsPage() {
         const mockEvent: Event = {
           id: 1,
           name: 'OlympiCS 2026',
-          year: 2026,
+          date: '2026-04-15',
+          description: 'Annual programming competition for JHU students',
           registration: true,
           eventGames: [
             {
@@ -70,6 +76,9 @@ export default function AdminSettingsPage() {
         };
         setEvent(mockEvent);
         setRegistrationEnabled(mockEvent.registration ?? true);
+        setEditName(mockEvent.name);
+        setEditDate(mockEvent.date || '');
+        setEditDescription(mockEvent.description || '');
       } catch (error) {
         console.error('Failed to fetch event:', error);
       } finally {
@@ -96,6 +105,37 @@ export default function AdminSettingsPage() {
       setRegistrationEnabled(!enabled);
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleSaveEventDetails = async () => {
+    setSaving(true);
+    try {
+      if (event) {
+        const updatedEvent = {
+          ...event,
+          name: editName,
+          date: editDate,
+          description: editDescription,
+        };
+        setEvent(updatedEvent);
+        setEditMode(false);
+      }
+      // In a real scenario, you would make an API call here
+      // await fetch(`/api/events/${event?.id}`, { method: 'PUT', body: JSON.stringify({ name: editName, date: editDate, description: editDescription }) });
+    } catch (error) {
+      console.error('Failed to update event details:', error);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    if (event) {
+      setEditName(event.name);
+      setEditDate(event.date || '');
+      setEditDescription(event.description || '');
+      setEditMode(false);
     }
   };
 
@@ -126,23 +166,95 @@ export default function AdminSettingsPage() {
           <div className="space-y-6">
             {/* Event Info */}
             <div className="border-b pb-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">
-                Current Event
-              </h3>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <p className="text-sm text-gray-600">Event Name</p>
-                  <p className="text-lg font-semibold text-gray-900">
-                    {event?.name}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-600">Year</p>
-                  <p className="text-lg font-semibold text-gray-900">
-                    {event?.year}
-                  </p>
-                </div>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-medium text-gray-900">
+                  Current Event
+                </h3>
+                {!editMode && (
+                  <button
+                    onClick={() => setEditMode(true)}
+                    className="px-3 py-1 text-sm font-medium text-blue-600 hover:bg-blue-50 rounded"
+                  >
+                    Edit
+                  </button>
+                )}
               </div>
+              {editMode ? (
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Event Name
+                    </label>
+                    <input
+                      type="text"
+                      value={editName}
+                      onChange={(e) => setEditName(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Event Date
+                    </label>
+                    <input
+                      type="date"
+                      value={editDate}
+                      onChange={(e) => setEditDate(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Event Description
+                    </label>
+                    <textarea
+                      value={editDescription}
+                      onChange={(e) => setEditDescription(e.target.value)}
+                      rows={3}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                  <div className="flex gap-3 pt-2">
+                    <button
+                      onClick={handleSaveEventDetails}
+                      disabled={saving}
+                      className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+                    >
+                      {saving ? 'Saving...' : 'Save'}
+                    </button>
+                    <button
+                      onClick={handleCancelEdit}
+                      disabled={saving}
+                      className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 disabled:opacity-50"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  <div>
+                    <p className="text-sm text-gray-600">Event Name</p>
+                    <p className="text-lg font-semibold text-gray-900">
+                      {event?.name}
+                    </p>
+                  </div>
+                  {event?.date && (
+                    <div>
+                      <p className="text-sm text-gray-600">Date</p>
+                      <p className="text-lg font-semibold text-gray-900">
+                        {new Date(event.date).toLocaleDateString()}
+                      </p>
+                    </div>
+                  )}
+                  {event?.description && (
+                    <div>
+                      <p className="text-sm text-gray-600">Description</p>
+                      <p className="text-gray-900">{event.description}</p>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* Registration Status */}
