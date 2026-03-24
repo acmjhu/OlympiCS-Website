@@ -27,3 +27,5 @@ jobs:
           cache-dependency-path: olympics-website/pnpm-lock.yaml
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
