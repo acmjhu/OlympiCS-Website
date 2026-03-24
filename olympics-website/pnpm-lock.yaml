@@ -140,8 +140,13 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
 
+<<<<<<< HEAD
   '@babel/runtime@7.28.6':
     resolution: {integrity: sha512-05WQkdpL9COIMz4LjTxGpPNCdlpyimKppYNoJ5Di5EUObifl8t4tuLuUBBZEpoLYOmfvIWrsp9fCl0HoPRVTdA==}
+=======
+  '@babel/runtime@7.29.2':
+    resolution: {integrity: sha512-JiDShH45zKHWyGe4ZNVRrCjBz8Nh9TMmZG1kh4QTK8hCBTWBi8Da+i7s1fJw7/lYpM4ccepSNfqzZ/QvABBi5g==}
+>>>>>>> 8fc9790 (spoddar2 set up NextAuth.js authentication (#26))
     engines: {node: '>=6.9.0'}
 
   '@babel/template@7.28.6':
@@ -2585,7 +2590,11 @@ snapshots:
     dependencies:
       '@babel/types': 7.29.0
 
+<<<<<<< HEAD
   '@babel/runtime@7.28.6': {}
+=======
+  '@babel/runtime@7.29.2': {}
+>>>>>>> 8fc9790 (spoddar2 set up NextAuth.js authentication (#26))
 
   '@babel/template@7.28.6':
     dependencies:
@@ -4439,7 +4448,11 @@ snapshots:
 
   next-auth@4.24.13(next@16.1.6(@babel/core@7.29.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
     dependencies:
+<<<<<<< HEAD
       '@babel/runtime': 7.28.6
+=======
+      '@babel/runtime': 7.29.2
+>>>>>>> 8fc9790 (spoddar2 set up NextAuth.js authentication (#26))
       '@panva/hkdf': 1.2.1
       cookie: 0.7.2
       jose: 4.15.9
