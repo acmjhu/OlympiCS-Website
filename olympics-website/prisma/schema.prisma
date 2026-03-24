@@ -17,11 +17,12 @@ model Game {
 }
 
 model Event {
-  id         Int          @id @default(autoincrement())
-  name       String
-  year       Int
-  teams      Team[]
-  eventGames EventGames[]
+  id           Int          @id @default(autoincrement())
+  name         String
+  year         Int
+  registration Boolean      @default(true)
+  teams        Team[]
+  eventGames   EventGames[]
 }
 
 model Team {
