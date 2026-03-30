@@ -40,6 +40,7 @@ export default function registerPage() {
   );
 }
 */
+import links from "@/data/links.json";
 
 
 export default function registerPage() {
@@ -66,8 +67,8 @@ export default function registerPage() {
         Register Using the Link Below:
       </span> 
       <a 
-        id="youtube-link"
-        href="https://www.youtube.com" 
+        id="registration-link"
+        href={links.registrationURL}
         target="_blank" 
         rel="noopener noreferrer" 
         className="text-indigo-400 font-bold hover:text-indigo-300 hover:underline text-3xl transition-colors"
