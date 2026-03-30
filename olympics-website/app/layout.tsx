@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Silkscreen } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Providers from "./providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,10 +32,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${silkScreen.variable}`}>
-      <body className="antialiased">
-        <Navbar/>
-        {children}
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased ${silkScreen.variable}`}>
+        <Providers>
+          <Navbar />
+          {children}
+        </Providers>
         <Footer />
       </body>
     </html>
