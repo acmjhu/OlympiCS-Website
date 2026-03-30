@@ -34,6 +34,10 @@ export default function AdminSettingsPage() {
   const [editName, setEditName] = useState('');
   const [editDate, setEditDate] = useState('');
   const [editDescription, setEditDescription] = useState('');
+  const [addGameMode, setAddGameMode] = useState(false);
+  const [newGameName, setNewGameName] = useState("");
+  const [newGameDescription, setNewGameDescription] = useState("");
+  const [newGamePointValue, setNewGamePointValue] = useState('0');
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -143,6 +147,56 @@ export default function AdminSettingsPage() {
     }
   };
 
+  const handleAddGame = () => {
+    if (!newGameName.trim()) {
+      alert("Please enter a game name");
+      return;
+    }
+
+    setSaving(true);
+    try {
+      if (event) {
+        const newGame: Game = {
+          id: Math.max(...event.eventGames!.map(eg => eg.game.id), 0) + 1,
+          name: newGameName,
+          description: newGameDescription || undefined,
+          pointValue: parseInt(newGamePointValue) || 0,
+        };
+
+        const newEventGame: EventGame = {
+          id: Math.max(...event.eventGames!.map(eg => eg.id), 0) + 1,
+          order: (event.eventGames?.length || 0) + 1,
+          game: newGame,
+        };
+
+        const updatedEvent = {
+          ...event,
+          eventGames: [...(event.eventGames || []), newEventGame],
+        };
+
+        setEvent(updatedEvent);
+        setNewGameName("");
+        setNewGameDescription("");
+        setNewGamePointValue("0");
+        setAddGameMode(false);
+      }
+      // In a real scenario, you would make an API call here
+      // await fetch(`/api/games`, { method: 'POST', body: JSON.stringify({ name: newGameName, description: newGameDescription, pointValue: parseInt(newGamePointValue) }) });
+    } catch (error) {
+      console.error('Failed to add game:', error);
+      alert('Failed to add game. Please try again.');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleCancelAddGame = () => {
+    setNewGameName("");
+    setNewGameDescription("");
+    setNewGamePointValue("0");
+    setAddGameMode(false);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 p-8">
@@ -177,7 +231,7 @@ export default function AdminSettingsPage() {
                 {!editMode && (
                   <button
                     onClick={() => setEditMode(true)}
-                    className="px-3 py-1 text-sm font-medium text-blue-600 hover:bg-blue-50 rounded"
+                    className="px-3 py-1 text-sm font-medium text-blue-600 hover:bg-blue-50 rounded cursor-pointer"
                   >
                     Edit
                   </button>
@@ -222,14 +276,14 @@ export default function AdminSettingsPage() {
                     <button
                       onClick={handleSaveEventDetails}
                       disabled={saving}
-                      className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+                      className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 cursor-pointer"
                     >
                       {saving ? 'Saving...' : 'Save'}
                     </button>
                     <button
                       onClick={handleCancelEdit}
                       disabled={saving}
-                      className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 disabled:opacity-50"
+                      className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-100 disabled:opacity-50 cursor-pointer"
                     >
                       Cancel
                     </button>
@@ -295,9 +349,81 @@ export default function AdminSettingsPage() {
 
         {/* Game Management Section */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">
-            Games
-          </h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-semibold text-gray-900">Games</h2>
+            {!addGameMode && (
+              <button
+                onClick={() => setAddGameMode(true)}
+                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm font-medium cursor-pointer"
+              >
+                + Add Game
+              </button>
+            )}
+          </div>
+
+          {/* Add Game Form */}
+          {addGameMode && (
+            <div className="bg-gray-50 rounded-lg p-6 mb-6 border border-gray-200">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                Create New Game
+              </h3>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Game Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={newGameName}
+                    onChange={e => setNewGameName(e.target.value)}
+                    placeholder="e.g., Coding Challenge"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Description
+                  </label>
+                  <textarea
+                    value={newGameDescription}
+                    onChange={e => setNewGameDescription(e.target.value)}
+                    placeholder="Describe the game"
+                    rows={3}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Point Value
+                  </label>
+                  <input
+                    type="number"
+                    value={newGamePointValue}
+                    onChange={e => setNewGamePointValue(e.target.value)}
+                    placeholder="0"
+                    min="0"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+                <div className="flex gap-3 pt-2">
+                  <button
+                    onClick={handleAddGame}
+                    disabled={saving}
+                    className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 font-medium cursor-pointer"
+                  >
+                    {saving ? "Creating..." : "Create Game"}
+                  </button>
+                  <button
+                    onClick={handleCancelAddGame}
+                    disabled={saving}
+                    className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-100 disabled:opacity-50 cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
 
           {event?.eventGames && event.eventGames.length > 0 ? (
             <div className="overflow-x-auto">
@@ -331,7 +457,7 @@ export default function AdminSettingsPage() {
                         </span>
                       </td>
                       <td className="px-4 py-3">
-                        <button className="text-gray-400 hover:text-gray-600 transition-colors p-1">
+                        <button className="text-gray-400 hover:text-gray-600 transition-colors p-1 cursor-pointer">
                           <svg
                             className="w-5 h-5"
                             fill="none"
