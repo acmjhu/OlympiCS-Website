@@ -1,27 +1,18 @@
-<<<<<<< HEAD
 "use client"
 
 import { useState } from "react"
-=======
->>>>>>> 55820b7 (historical events and winner page finished.)
 import photos from "@/data/photos.json"
 import Image from "next/image"
 
 export default function PhotoGallery({ year }: { year: string }) {
-<<<<<<< HEAD
   const yearPhotos = photos[year as keyof typeof photos] || []
   const [selected, setSelected] = useState<string | null>(null)
-=======
-
-  const yearPhotos = photos[year as keyof typeof photos] || []
->>>>>>> 55820b7 (historical events and winner page finished.)
 
   if (yearPhotos.length === 0) {
     return <p className="text-gray-500">No photos available</p>
   }
 
   return (
-<<<<<<< HEAD
     <>
       {/* Photo Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -71,22 +62,5 @@ export default function PhotoGallery({ year }: { year: string }) {
         </div>
       )}
     </>
-=======
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {yearPhotos.map((src, i) => (
-        <div
-          key={i}
-          className="relative w-full h-48 overflow-hidden rounded-lg"
-        >
-          <Image
-            src={src}
-            alt="Event photo"
-            fill
-            className="object-cover hover:scale-105 transition"
-          />
-        </div>
-      ))}
-    </div>
->>>>>>> 55820b7 (historical events and winner page finished.)
   )
 }
