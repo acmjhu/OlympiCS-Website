@@ -1,0 +1,18 @@
+[
+    {
+        "id": "game1",
+        "label": "Game1",
+        "teams": ["Team1", "Team2", "Team3"] 
+    }, 
+    {
+        "id": "game2",
+        "label": "Game2",
+        "teams": ["Team1", "Team2", "Team4"]  
+    },
+    {
+        "id": "game3",
+        "label": "Game3",
+        "teams": ["Team1", "Team2", "Team2.5"]  
+    }
+]
+
