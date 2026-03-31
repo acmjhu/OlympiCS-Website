@@ -1,0 +1,35 @@
+{
+    "sections": [
+        {
+            "id": "what-is-olympics",
+            "Question": "What is OlympiCS?", 
+            "Answer": "abcd"
+        },
+        {
+            "id": "do-i-need-to-know-code",
+            "Question": "Do I need to know how to code?", 
+            "Answer": "abcd"
+        },
+        {
+            "id": "how-many-people-per-team",
+            "Question": "How many people per team?", 
+            "Answer": "abcd"
+        },
+        {
+            "id": "is-there-food",
+            "Question": "Is there food?", 
+            "Answer": "abcd"
+        },
+        {
+            "id": "what-to-bring",
+            "Question": "What should I bring?", 
+            "Answer": "abcd"
+        },
+        {
+            "id": "is-it-free",
+            "Question": "Is it free?", 
+            "Answer": "abcd"
+        }
+    ],
+    "lastUpdated": "2026-03-02"
+}
