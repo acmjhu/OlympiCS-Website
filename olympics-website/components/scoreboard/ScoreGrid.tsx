@@ -18,16 +18,31 @@ function ScoreGrid({ teams }: { teams: (Team & { rank: number })[] }) {
     3: "text-orange-400",
   };
 
+  const borderText: Record<number, string> = {
+    1: "border-yellow-400",
+    2: "border-gray-300",
+    3: "border-orange-400",
+    4: "border-gray-700",
+  };
+
+  const glowText: Record<number, string> = {
+    1: "shadow-[0_0_15px_rgba(250,204,21,0.25)]",
+    2: "shadow-[0_0_10px_rgba(209,213,219,0.25)]",
+    3: "shadow-[0_0_10px_rgba(251,146,60,0.25)]",
+  };
+
   return (
     <>
       {/*Mobile display*/}
       <div className="flex flex-col gap-3 px-4 md:hidden">
         {teams.map((team) => {
           const nameColor = medalText[team.rank] ?? "text-gray-300";
+          const borderColor = borderText[team.rank] ?? "border-gray-300";
+          const medalGlow = glowText[team.rank] ?? "";
           return (
             <div
               key={team.id}
-              className="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden"
+              className={`bg-gray-800 rounded-xl border ${borderColor} ${medalGlow} overflow-hidden`}
             >
               {/* Card header */}
               <div className="flex items-center justify-between px-4 py-3 bg-gray-700">
@@ -48,7 +63,7 @@ function ScoreGrid({ teams }: { teams: (Team & { rank: number })[] }) {
                 </span>
               </div>
               {/* Event score rows */}
-              <div className="divide-y divide-gray-700">
+              <div className="divide-y divide-gray-600">
                 {events.map((event) => {
                   const val = team.scores[event] ?? 0;
                   const isEventWinner = val > 0 && val === eventWinners[event];
