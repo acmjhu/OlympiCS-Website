@@ -1,0 +1,31 @@
+{
+  "Past events": {
+    "2023": {
+      "event name": "OlympiCS 2023",
+      "date": "mm/dd/yy",
+      "top 3 winners": [
+        "1st place: Team A, score: xxx",
+        "2nd place: Team B, score: xxx",
+        "3rd place: Team C, score: xxx"
+      ]
+    },
+    "2024": {
+      "event name": "OlympiCS 2024",
+      "date": "mm/dd/yy",
+      "top 3 winners": [
+        "1st place: Team A, score: xxx",
+        "2nd place: Team B, score: xxx",
+        "3rd place: Team C, score: xxx"
+      ]
+    },
+    "2025": {
+      "event name": "OlympiCS 2025",
+      "date": "mm/dd/yy",
+      "top 3 winners": [
+        "1st place: Team A, score: xxx",
+        "2nd place: Team B, score: xxx",
+        "3rd place: Team C, score: xxx"
+      ]
+    }
+  }
+}

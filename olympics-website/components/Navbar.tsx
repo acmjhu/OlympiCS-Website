@@ -20,6 +20,7 @@ export default function Navbar() {
         {href: '/teams', label: "Teams"},
         {href: '/faq', label: "FAQ"},
         {href: '/register', label: "Register"},
+        {href: '/history', label: "History"}
     ];
 
     const handleClick = () => {
