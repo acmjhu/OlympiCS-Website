@@ -6,8 +6,21 @@ export default function HistoryPage() {
     .sort((a, b) => Number(b[0]) - Number(a[0]))
 
   return (
-    <div className="bg-white text-black min-h-screen pt-24 p-6">
+    <div className="relative isolate overflow-hidden bg-gray-900 text-white min-h-screen pt-24 p-6">
+
+      {/* Background blur */}
+      <div className="absolute inset-x-0 -top-40 -z-10 blur-3xl">
+        <div
+          className="mx-auto aspect-[1155/678] w-[36rem] bg-gradient-to-bl from-[#002D72] to-[#68ACE5] opacity-50"
+          style={{
+            clipPath:
+              "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+          }}
+        />
+      </div>
+
       <div className="mx-auto px-6 sm:px-12">
+
         <h1 className="text-4xl font-bold text-center mb-12">
           Past Events
         </h1>
