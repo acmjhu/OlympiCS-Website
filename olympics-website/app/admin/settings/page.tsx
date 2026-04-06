@@ -19,10 +19,9 @@ interface EventGame {
 interface Event {
   id: number;
   name: string;
-  date?: string;
-  description?: string;
-  registration?: boolean;
-  eventGames?: EventGame[];
+  year: number;
+  registration: boolean;
+  eventGames: EventGame[];
 }
 
 export default function AdminSettingsPage() {
@@ -31,85 +30,57 @@ export default function AdminSettingsPage() {
   const [registrationEnabled, setRegistrationEnabled] = useState(true);
   const [saving, setSaving] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const [editName, setEditName] = useState('');
-  const [editDate, setEditDate] = useState('');
-  const [editDescription, setEditDescription] = useState('');
+  const [editName, setEditName] = useState("");
+  const [editYear, setEditYear] = useState(0);
   const [addGameMode, setAddGameMode] = useState(false);
   const [newGameName, setNewGameName] = useState("");
   const [newGameDescription, setNewGameDescription] = useState("");
-  const [newGamePointValue, setNewGamePointValue] = useState('0');
+  const [newGamePointValue, setNewGamePointValue] = useState("0");
 
-  useEffect(() => {
-    const fetchEvent = async () => {
-      try {
-        // For now, we'll use mock data
-        const mockEvent: Event = {
-          id: 1,
-          name: 'OlympiCS 2026',
-          date: '2026-04-15',
-          description: 'Annual programming competition for JHU students',
-          registration: true,
-          eventGames: [
-            {
-              id: 1,
-              order: 1,
-              game: {
-                id: 1,
-                name: 'Coding Challenge',
-                description: 'Teams compete to solve algorithmic problems',
-                pointValue: 100,
-              },
-            },
-            {
-              id: 2,
-              order: 2,
-              game: {
-                id: 2,
-                name: 'Web Development',
-                description: 'Build a web application with a time limit',
-                pointValue: 150,
-              },
-            },
-            {
-              id: 3,
-              order: 3,
-              game: {
-                id: 3,
-                name: 'Game Development',
-                description: 'Create a game in the given time frame',
-                pointValue: 200,
-              },
-            },
-          ],
-        };
-        setEvent(mockEvent);
-        setRegistrationEnabled(mockEvent.registration ?? true);
-        setEditName(mockEvent.name);
-        setEditDate(mockEvent.date || '');
-        setEditDescription(mockEvent.description || '');
-      } catch (error) {
-        console.error('Failed to fetch event:', error);
-      } finally {
-        setLoading(false);
+  const fetchEvent = async () => {
+    try {
+      const response = await fetch("/api/admin/events");
+      if (!response.ok) {
+        throw new Error("Failed to fetch event");
       }
+      const eventData = await response.json();
+      setEvent(eventData);
+    } catch (error) {
+      console.error("Failed to fetch event:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  useEffect(() => {
+    const setEventData = async () => {
+      await fetchEvent();
+      setRegistrationEnabled(event?.registration ?? true);
+      setEditName(event?.name || "");
+      setEditYear(event?.year || 0);
     };
 
-    fetchEvent();
+    setEventData();
   }, []);
 
   const handleRegistrationToggle = async (enabled: boolean) => {
     setRegistrationEnabled(enabled);
     setSaving(true);
     try {
-      // Update the event registration flag
-      if (event) {
-        const updatedEvent = { ...event, registration: enabled };
-        setEvent(updatedEvent);
+      const response = await fetch(`/api/admin/events/${event?.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ registration: true }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update registration");
       }
-      // In a real scenario, you would make an API call here
-      // await fetch(`/api/events/${event?.id}`, { method: 'PUT', body: JSON.stringify({ registration: enabled }) });
+
+      const updatedEvent = await response.json();
+      setEvent(updatedEvent);
     } catch (error) {
-      console.error('Failed to update registration:', error);
+      console.error("Failed to update registration:", error);
       setRegistrationEnabled(!enabled);
     } finally {
       setSaving(false);
@@ -119,20 +90,25 @@ export default function AdminSettingsPage() {
   const handleSaveEventDetails = async () => {
     setSaving(true);
     try {
-      if (event) {
-        const updatedEvent = {
-          ...event,
+      const response = await fetch(`/api/admin/events/${event?.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           name: editName,
-          date: editDate,
-          description: editDescription,
-        };
-        setEvent(updatedEvent);
-        setEditMode(false);
+          year: editYear
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update event details");
       }
-      // In a real scenario, you would make an API call here
-      // await fetch(`/api/events/${event?.id}`, { method: 'PUT', body: JSON.stringify({ name: editName, date: editDate, description: editDescription }) });
+
+      const updatedEvent = await response.json();
+      setEvent(updatedEvent);
+      setEditMode(false);
     } catch (error) {
-      console.error('Failed to update event details:', error);
+      console.error("Failed to update event details:", error);
+      alert("Failed to save event details");
     } finally {
       setSaving(false);
     }
@@ -141,13 +117,12 @@ export default function AdminSettingsPage() {
   const handleCancelEdit = () => {
     if (event) {
       setEditName(event.name);
-      setEditDate(event.date || '');
-      setEditDescription(event.description || '');
+      setEditYear(event.year);
       setEditMode(false);
     }
   };
 
-  const handleAddGame = () => {
+  const handleAddGame = async () => {
     if (!newGameName.trim()) {
       alert("Please enter a game name");
       return;
@@ -155,33 +130,29 @@ export default function AdminSettingsPage() {
 
     setSaving(true);
     try {
-      if (event) {
-        const newGame: Game = {
-          id: Math.max(...event.eventGames!.map(eg => eg.game.id), 0) + 1,
+      const response = await fetch('/api/admin/games', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           name: newGameName,
-          description: newGameDescription || undefined,
+          description: newGameDescription || null,
           pointValue: parseInt(newGamePointValue) || 0,
-        };
+          eventId: event?.id,
+          order: (event?.eventGames?.length || 0) + 1
+        })
+      });
 
-        const newEventGame: EventGame = {
-          id: Math.max(...event.eventGames!.map(eg => eg.id), 0) + 1,
-          order: (event.eventGames?.length || 0) + 1,
-          game: newGame,
-        };
-
-        const updatedEvent = {
-          ...event,
-          eventGames: [...(event.eventGames || []), newEventGame],
-        };
-
-        setEvent(updatedEvent);
-        setNewGameName("");
-        setNewGameDescription("");
-        setNewGamePointValue("0");
-        setAddGameMode(false);
+      if (!response.ok) {
+        throw new Error("Failed to create game");
       }
-      // In a real scenario, you would make an API call here
-      // await fetch(`/api/games`, { method: 'POST', body: JSON.stringify({ name: newGameName, description: newGameDescription, pointValue: parseInt(newGamePointValue) }) });
+
+      // Refresh event data after adding game
+      fetchEvent();
+
+      setNewGameName("");
+      setNewGameDescription("");
+      setNewGamePointValue("0");
+      setAddGameMode(false);
     } catch (error) {
       console.error('Failed to add game:', error);
       alert('Failed to add game. Please try again.');
@@ -255,20 +226,9 @@ export default function AdminSettingsPage() {
                       Event Date
                     </label>
                     <input
-                      type="date"
-                      value={editDate}
-                      onChange={(e) => setEditDate(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Event Description
-                    </label>
-                    <textarea
-                      value={editDescription}
-                      onChange={(e) => setEditDescription(e.target.value)}
-                      rows={3}
+                      type="number"
+                      value={editYear}
+                      onChange={(e) => setEditYear(parseInt(e.target.value))}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                     />
                   </div>
@@ -297,18 +257,12 @@ export default function AdminSettingsPage() {
                       {event?.name}
                     </p>
                   </div>
-                  {event?.date && (
+                  {event?.year && (
                     <div>
-                      <p className="text-sm text-gray-600">Date</p>
+                      <p className="text-sm text-gray-600">Year</p>
                       <p className="text-lg font-semibold text-gray-900">
-                        {new Date(event.date).toLocaleDateString()}
+                        {event.year}
                       </p>
-                    </div>
-                  )}
-                  {event?.description && (
-                    <div>
-                      <p className="text-sm text-gray-600">Description</p>
-                      <p className="text-gray-900">{event.description}</p>
                     </div>
                   )}
                 </div>
