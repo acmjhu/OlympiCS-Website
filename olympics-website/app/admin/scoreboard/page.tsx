@@ -48,6 +48,17 @@ export default function AdminScoreboard() {
         fetchScores();
     }, [selectedGameId]);
 
+    const penaltyTotals = penalties.reduce<Record<string, number>>((acc,p) => {
+        acc[p.team] = (acc[p.team] ?? 0) + (p.points || 0);
+        return acc;
+    }, {});
+
+    const previewScores = activeGame 
+        ? [...activeGame.teams].map((team) => ({
+            team, 
+            total: (scores[team] ?? 0) - (penaltyTotals[team] ?? 0),
+        })).sort((a,b) => b.total - a.total) : [];
+
     return (
     <div className = "space p-4">
     <div className="flex flex-col gap-4 w-full max-w-md p-8 bg-white rounded-lg">
@@ -136,7 +147,18 @@ export default function AdminScoreboard() {
         <button className = "mt-6 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">
             Save
         </button>
+        <div className="mt-8">
+            <h3 className = "font-bold">Live Preview</h3>
+            {previewScores.map(({team, total}, rank) => (
+                <div key ={team} className="flex justify-between">
+                    <span>{rank+1}.{team}</span>
+                    <span>{total}</span>
+                </div>
+            ))}
         </div>
+
+        </div>
+        
     )}
     </div>
     );
