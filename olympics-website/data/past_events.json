@@ -1,31 +1,13 @@
 {
-  "Past events": {
-    "2023": {
-      "event name": "OlympiCS 2023",
-      "date": "mm/dd/yy",
-      "top 3 winners": [
-        "1st place: Team A, score: xxx",
-        "2nd place: Team B, score: xxx",
-        "3rd place: Team C, score: xxx"
-      ]
-    },
-    "2024": {
-      "event name": "OlympiCS 2024",
-      "date": "mm/dd/yy",
-      "top 3 winners": [
-        "1st place: Team A, score: xxx",
-        "2nd place: Team B, score: xxx",
-        "3rd place: Team C, score: xxx"
-      ]
-    },
-    "2025": {
-      "event name": "OlympiCS 2025",
-      "date": "mm/dd/yy",
-      "top 3 winners": [
-        "1st place: Team A, score: xxx",
-        "2nd place: Team B, score: xxx",
-        "3rd place: Team C, score: xxx"
-      ]
+    "Past events": {
+        "2025": {
+            "event name": "OlympiCS 2025",
+            "date": "05/01/25",
+            "top 3 winners": [
+                "1st place: Manuel and Friends, score: 78.5",
+                "2nd place: Interlock, score: 77",
+                "3rd place: No shower, score: 62.5"
+            ]
+        }
     }
-  }
 }

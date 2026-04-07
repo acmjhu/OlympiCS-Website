@@ -1,9 +1,7 @@
 {
-  "2025": [
-    "/photos/2025/photo1.jpg",
-    "/photos/2025/photo2.jpg"
-  ],
-  "2024": [
-    "/photos/2024/photo1.jpg"
-  ]
+    "2025": [
+        "/photos/2025/image1.jpg",
+        "/photos/2025/IMG_1744.jpg",
+        "/photos/2025/IMG_1764.jpg"
+    ]
 }
