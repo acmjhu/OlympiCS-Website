@@ -19,7 +19,7 @@ export default function PhotoGallery({ year }: { year: string }) {
         {yearPhotos.map((src, i) => (
           <div
             key={i}
-            className="relative w-full h-48 overflow-hidden rounded-lg cursor-pointer"
+            className="relative h-48 overflow-hidden cursor-pointer"
             onClick={() => setSelected(src)}
           >
             <Image
@@ -27,7 +27,7 @@ export default function PhotoGallery({ year }: { year: string }) {
               alt="Event photo"
               fill
               sizes="(max-width: 768px) 50vw, 25vw"
-              className="object-cover hover:scale-105 transition pointer-events-none"
+              className="object-cover hover:scale-105 rounded-lg transition pointer-events-none"
             />
           </div>
         ))}
