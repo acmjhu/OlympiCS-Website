@@ -19,7 +19,7 @@ export default function PhotoGallery({ year }: { year: string }) {
         {yearPhotos.map((src, i) => (
           <div
             key={i}
-            className="relative w-full h-48 overflow-hidden rounded-lg cursor-pointer"
+            className="relative h-48 overflow-hidden cursor-pointer"
             onClick={() => setSelected(src)}
           >
             <Image
