@@ -3,10 +3,11 @@ import prisma from '@/lib/prisma';
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const eventId = parseInt(params.id);
+    const { id } = await params;
+    const eventId = parseInt(id);
     const body = await request.json();
 
     const { name, year, registration } = body;
@@ -18,13 +19,25 @@ export async function PATCH(
       );
     }
 
-    const updatedEvent = await prisma.event.update({
+    await prisma.event.update({
       where: { id: eventId },
       data: {
         ...(name && { name }),
         ...(year !== undefined && { year }),
         ...(registration !== undefined && { registration }),
-      }
+      },
+    });
+
+    // Fetch separately — Neon HTTP adapter doesn't support the implicit
+    // transaction that Prisma uses when `include` is combined with `update`.
+    const updatedEvent = await prisma.event.findUnique({
+      where: { id: eventId },
+      include: {
+        eventGames: {
+          include: { game: true },
+          orderBy: { order: 'asc' },
+        },
+      },
     });
 
     return NextResponse.json(updatedEvent, { status: 200 });

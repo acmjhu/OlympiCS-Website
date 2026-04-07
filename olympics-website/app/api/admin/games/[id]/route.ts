@@ -3,10 +3,11 @@ import prisma from '@/lib/prisma';
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const gameId = parseInt(params.id);
+    const { id } = await params;
+    const gameId = parseInt(id);
     const body = await request.json();
 
     const { name, description, pointValue } = body;
@@ -18,15 +19,18 @@ export async function PATCH(
       );
     }
 
-    const updatedGame = await prisma.game.update({
+    // Neon HTTP adapter doesn't support the implicit transaction used when
+    // `include` accompanies an update, so split into update + findUnique.
+    await prisma.game.update({
       where: { id: gameId },
       data: {
         ...(name && { name }),
         ...(description !== undefined && { description: description || null }),
         ...(pointValue !== undefined && { pointValue }),
-      }
+      },
     });
 
+    const updatedGame = await prisma.game.findUnique({ where: { id: gameId } });
     return NextResponse.json(updatedGame, { status: 200 });
   } catch (error) {
     console.error("Error updating game:", error);
@@ -38,26 +42,30 @@ export async function PATCH(
 }
 
 export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { id: string } }
+  _request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const gameId = parseInt(params.id);
+    const { id } = await params;
+    const gameId = parseInt(id);
 
-    // Delete associated EventGames records first
+    // Delete scores linked to this game's EventGames first to satisfy FK constraints.
+    await prisma.score.deleteMany({
+      where: {
+        eventGames: {
+          gameId,
+        },
+      },
+    });
+
+    // Delete associated EventGames records.
     await prisma.eventGames.deleteMany({
       where: { gameId }
     });
 
     // Delete the game
-    const deletedGame = await prisma.game.delete({
-      where: { id: gameId }
-    });
-
-    return NextResponse.json(
-      { message: "Game deleted successfully", game: deletedGame },
-      { status: 200 }
-    );
+    await prisma.game.delete({ where: { id: gameId } });
+    return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
     console.error("Error deleting game:", error);
     return NextResponse.json(
