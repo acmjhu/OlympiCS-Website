@@ -1,10 +1,12 @@
 {
-    "event_name" : "JHU OlympiCS 2026",
-    "tagline" : "Where CS Majors Touch Grass",
-    "short_desc" : "OlympiCS is a one-day event where all computer science affiliated students come to compete in a field day full of prizes and cs-themed games.",
-    "date" : "April 29th, 2026",
-    "location" : "Keyser Quad on Homewood Campus",
-    "highlights" : [
-        "Highlight1", "higlight2"
+    "event_name": "JHU OlympiCS 2026",
+    "tagline": "Where CS Majors Touch Grass",
+    "short_desc": "OlympiCS is a one-day event where all computer science affiliated students come to compete in a field day full of prizes and cs-themed games.",
+    "date": "April 29th, 2026",
+    "location": "Keyser Quad on Homewood Campus",
+    "highlights": [
+        "Free T-Shirts",
+        "Free Food",
+        "Win Prizes"
     ]
 }
