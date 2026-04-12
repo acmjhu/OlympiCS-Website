@@ -1,4 +1,4 @@
-//Home, Rules, Schedule, Scoreboard, Teams, Register
+//Home, Rules, Schedule, Scoreboard, Teams, FAQ, Register
 
 "use client";
 
@@ -18,7 +18,9 @@ export default function Navbar() {
         {href: '/schedule', label: "Schedule"},
         {href: '/scoreboard', label: "Scoreboard"},
         {href: '/teams', label: "Teams"},
+        {href: '/faq', label: "FAQ"},
         {href: '/register', label: "Register"},
+        {href: '/history', label: "History"}
     ];
 
     const handleClick = () => {

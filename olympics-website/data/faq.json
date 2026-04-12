@@ -1,0 +1,35 @@
+{
+    "sections": [
+        {
+            "id": "what-is-olympics",
+            "Question": "What is OlympiCS?",
+            "Answer": "OlympiCS is a one-day event where all computer science affiliated students come to compete in a field day full of prizes and cs-themed games."
+        },
+        {
+            "id": "do-i-need-to-know-code",
+            "Question": "Do I need to know how to code?",
+            "Answer": "No! OlympiCS is a field day for computer science affiliated students. While there will be some cs-themed games, there will also be plenty of other games and activities for everyone to enjoy."
+        },
+        {
+            "id": "how-many-people-per-team",
+            "Question": "How many people per team?",
+            "Answer": "Teams must consist of 2-4 people. All members must be affiliated with the computer science department, which includes undergraduate students, graduate students, and faculty."
+        },
+        {
+            "id": "is-there-food",
+            "Question": "Is there food?",
+            "Answer": "Yes! There will be plenty of food for everyone."
+        },
+        {
+            "id": "what-to-bring",
+            "Question": "What should I bring?",
+            "Answer": "Bring comfortable clothes and shoes, as there will be plenty of outdoor activities. Also bring sunscreen, a hat, and sunglasses, as the event will be held outdoors."
+        },
+        {
+            "id": "is-it-free",
+            "Question": "Is it free?",
+            "Answer": "Yes! OlympiCS is completely free to attend. All food, drinks, and supplies will be provided."
+        }
+    ],
+    "lastUpdated": "2026-04-06"
+}
