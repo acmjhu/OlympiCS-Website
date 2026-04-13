@@ -19,7 +19,7 @@ export default function PhotoGallery({ year }: { year: string }) {
         {yearPhotos.map((src, i) => (
           <div
             key={i}
-            className="relative h-48 overflow-hidden cursor-pointer"
+            className="relative w-full h-48 overflow-hidden rounded-lg cursor-pointer"
             onClick={() => setSelected(src)}
           >
             <Image
@@ -39,7 +39,7 @@ export default function PhotoGallery({ year }: { year: string }) {
           className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4"
           onClick={() => setSelected(null)}
         >
-          
+          {/* Image with explicit width/height */}
           <Image
             src={selected}
             alt="Expanded photo"
