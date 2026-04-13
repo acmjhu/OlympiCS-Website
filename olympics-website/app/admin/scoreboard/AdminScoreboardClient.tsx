@@ -9,7 +9,7 @@ import {  useEffect, useState } from "react";
         team:string;
         reason: string;
         points: number;
-    }
+    } 
 
 
 export default function AdminScoreboardClient() {
@@ -99,7 +99,7 @@ export default function AdminScoreboardClient() {
 return (
   <div className="bg-gray-900 relative isolate overflow-hidden min-h-screen p-4">
     
-    {/* Background blob from home page */}
+
     <div
       aria-hidden="true"
       className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
@@ -201,7 +201,7 @@ return (
           className={`mt-6 w-full py-2 rounded-md transition text-white ${
             saved ? "bg-green-500" : "bg-blue-600 hover:bg-blue-700"
           }`}>
-          {saved ? "✓ Saved!" : "Save"}
+          {saved ? "Saved!" : "Save"}
         </button>
 
         <div className="mt-8">
