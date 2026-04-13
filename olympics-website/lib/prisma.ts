@@ -1,5 +1,5 @@
-import { PrismaNeonHttp } from '@prisma/adapter-neon'
-import { PrismaClient } from '@/app/generated/prisma/client'
+import { PrismaNeonHttp } from "@prisma/adapter-neon";
+import { PrismaClient } from "@/app/generated/prisma/client";
 
 declare global {
     var prismaGlobal: undefined | PrismaClient
