@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import {auth} from "@/auth";
+
 
 interface ScoreInput {
     teamId: number;
@@ -8,6 +10,12 @@ interface ScoreInput {
 }
 
 export async function POST(req:NextRequest) {
+    const session = await auth();
+
+    if (!session || session.user.role != "admin") {
+        return NextResponse.json({error: "Unauthorized"}, {status: 401});
+    }
+
     try {
         const scores: ScoreInput[] = await req.json();
 
