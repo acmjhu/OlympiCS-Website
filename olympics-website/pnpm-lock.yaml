@@ -85,6 +85,7 @@ importers:
 >>>>>>> b791c36 (json driven event timeline, mobile sync valid #6 (#27))
 =======
 
+<<<<<<< HEAD
 
       lucide-react:
         specifier: ^0.577.0
@@ -92,6 +93,8 @@ importers:
 
 
 >>>>>>> eb2245b (json driven event timeline, mobile sync valid #6 (#27))
+=======
+>>>>>>> 386b319 (Fixed CI fail)
       next:
         specifier: 16.1.6
         version: 16.1.6(@babel/core@7.29.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
