@@ -14,7 +14,7 @@
         "@neondatabase/serverless": "^1.0.2",
         "@prisma/adapter-neon": "^7.4.2",
         "@prisma/client": "^7.4.2",
-        "@prisma/client-runtime-utils": "^7.7.0",
+        "@prisma/client-runtime-utils": "^7.6.0",
         "bcryptjs": "^3.0.3",
         "lucide-react": "^0.577.0",
         "next": "16.1.6",
