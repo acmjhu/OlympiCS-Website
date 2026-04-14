@@ -46,60 +46,67 @@ export default function ScoreboardPage() {
   const hasScores = teams.some((t) => t.score > 0);
 
   return (
-    <main className="relative min-h-screen text-white px-4 py-12 bg-gray-900 z-50">
-      {/*Michelle background*/}
-      <CoolBackgroundGlow />
+    <main className="relative min-h-screen text-white px-4 py-12 bg-gray-900">
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <CoolBackgroundGlow />
+      </div>
 
-      {/* Header */}
-      <header className="text-center mb-10">
-        <h1 className="text-4xl font-black tracking-tight">OlympiCS</h1>
-        <h1 className="text-4xl font-black tracking-tight py-4">4/29/26</h1>
-        <h1 className="text-4xl font-black tracking-tight">Live Leaderboard</h1>
-      </header>
+      <div className="relative z-10">
+        {/* Header */}
+        <header className="text-center mb-10">
+          <h1 className="text-4xl font-black tracking-tight">OlympiCS</h1>
+          <h1 className="text-4xl font-black tracking-tight py-4">4/29/26</h1>
+          <h1 className="text-4xl font-black tracking-tight">
+            Live Leaderboard
+          </h1>
+        </header>
 
-      {/* Toggle button */}
-      <button
-        className="flex mx-auto border px-4 py-1 rounded-lg mt-3 mb-5 hover:bg-white/10 transition-colors"
-        onClick={() => setView(view === "leaderboard" ? "grid" : "leaderboard")}
-      >
-        {view === "leaderboard" ? "📊 View Grid" : "🏆 View Leaderboard"}
-      </button>
+        {/* Toggle button */}
+        <button
+          className="flex mx-auto border px-4 py-1 rounded-lg mt-3 mb-5 hover:bg-white/10 transition-colors"
+          onClick={() =>
+            setView(view === "leaderboard" ? "grid" : "leaderboard")
+          }
+        >
+          {view === "leaderboard" ? "📊 View Grid" : "🏆 View Leaderboard"}
+        </button>
 
-      {/* Loading / error states */}
-      {loading && (
-        <p className="text-center text-white/50">Loading scoreboard...</p>
-      )}
-      {error && <p className="text-center text-red-400">{error}</p>}
+        {/* Loading / error states */}
+        {loading && (
+          <p className="text-center text-white/50">Loading scoreboard...</p>
+        )}
+        {error && <p className="text-center text-red-400">{error}</p>}
 
-      {/* Leaderboard view */}
-      {!loading && !error && view === "leaderboard" && (
-        <div>
-          {!hasTeams ? (
-            <EmptyState message="No teams have been accepted yet." />
-          ) : !hasScores ? (
-            <EmptyState message="Scoreboard will be available on event day." />
-          ) : (
-            <section className="text-2xl text-center max-w-2xl mx-auto flex flex-col gap-3">
-              {teamsWithRank.map((team) => (
-                <TeamRow key={team.id} team={team} rank={team.rank} />
-              ))}
-            </section>
-          )}
-        </div>
-      )}
+        {/* Leaderboard view */}
+        {!loading && !error && view === "leaderboard" && (
+          <div>
+            {!hasTeams ? (
+              <EmptyState message="No teams have been accepted yet." />
+            ) : !hasScores ? (
+              <EmptyState message="Scoreboard will be available on event day." />
+            ) : (
+              <section className="text-2xl text-center max-w-2xl mx-auto flex flex-col gap-3">
+                {teamsWithRank.map((team) => (
+                  <TeamRow key={team.id} team={team} rank={team.rank} />
+                ))}
+              </section>
+            )}
+          </div>
+        )}
 
-      {/* Grid view */}
-      {!loading && !error && view === "grid" && (
-        <div>
-          {!hasTeams ? (
-            <EmptyState message="No teams have been accepted yet." />
-          ) : !hasScores ? (
-            <EmptyState message="Scoreboard will be available on event day." />
-          ) : (
-            <ScoreGrid teams={teamsWithRank} />
-          )}
-        </div>
-      )}
+        {/* Grid view */}
+        {!loading && !error && view === "grid" && (
+          <div>
+            {!hasTeams ? (
+              <EmptyState message="No teams have been accepted yet." />
+            ) : !hasScores ? (
+              <EmptyState message="Scoreboard will be available on event day." />
+            ) : (
+              <ScoreGrid teams={teamsWithRank} />
+            )}
+          </div>
+        )}
+      </div>
     </main>
   );
 }
