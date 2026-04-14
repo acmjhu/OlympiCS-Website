@@ -1,19 +1,38 @@
 'use client'
 
 import { signIn } from 'next-auth/react'
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 
-export default function LoginPage() {
+function LoginButton() {
   const [isLoading, setIsLoading] = useState(false)
+  const searchParams = useSearchParams()
+  const callbackUrl = searchParams.get('callbackUrl') || '/'
+
 
   const handleGoogleSignIn = async () => {
     setIsLoading(true)
     try {
-      await signIn('google', { callbackUrl: '/' })
+      await signIn('google', { callbackUrl })
     } finally {
       setIsLoading(false)
     }
   }
+
+  return (
+    <button
+      onClick={handleGoogleSignIn}
+      disabled={isLoading}
+      className="w-full flex items-center justify-center gap-3 px-6 py-3 bg-white border-2 border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      {isLoading ? 'Signing in...' : 'Sign in with Google'}
+    </button>
+  )
+}
+
+
+
+export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4">
@@ -23,7 +42,7 @@ export default function LoginPage() {
           <p className="text-gray-600">Sign in to your account</p>
         </div>
 
-        <button
+        {/* <button
           onClick={handleGoogleSignIn}
           disabled={isLoading}
           className="w-full flex items-center justify-center gap-3 px-6 py-3 bg-white border-2 border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
@@ -47,7 +66,10 @@ export default function LoginPage() {
             />
           </svg>
           {isLoading ? 'Signing in...' : 'Sign in with Google'}
-        </button>
+        </button> */}
+        <Suspense>
+          <LoginButton />
+        </Suspense>
 
         <div className="mt-6 text-center text-sm text-gray-600">
           <p>By signing in, you agree to our terms of service</p>
