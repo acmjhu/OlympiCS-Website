@@ -8,105 +8,130 @@ import ScoreGrid from "@/components/scoreboard/ScoreGrid";
 import CoolBackgroundGlow from "@/components/scoreboard/CoolBackgroundGlow";
 
 export default function ScoreboardPage() {
-  const [view, setView] = useState<"leaderboard" | "grid">("leaderboard");
-  const [teams, setTeams] = useState<Team[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+    const [view, setView] = useState<"leaderboard" | "grid">("leaderboard");
+    const [teams, setTeams] = useState<Team[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetch("/api/scoreboard")
-      .then((res) => res.json())
-      .then((data) => {
-        const mapped: Team[] = data.scoreboard.map(
-          (t: {
-            id: number;
-            name: string;
-            totalScore: number;
-            scores: { game: string; score: number }[];
-          }) => ({
-            id: t.id,
-            name: t.name,
-            score: t.totalScore,
-            scores: Object.fromEntries(t.scores.map((s) => [s.game, s.score])),
-          })
+    const isEventLive = false;
+
+    if (!isEventLive) {
+        return (
+            <main className="relative min-h-screen text-white px-4 py-12 bg-gray-900">
+                <div className="absolute inset-0 z-0 pointer-events-none">
+                    <CoolBackgroundGlow />
+                </div>
+
+                <div className="relative z-10">
+                    {/* Header */}
+                    <header className="text-center mb-10">
+                        <h1 className="text-4xl font-black tracking-tight">OlympiCS</h1>
+                        <h1 className="text-4xl font-black tracking-tight py-4">4/29/26</h1>
+                        <h1 className="text-4xl font-black tracking-tight">
+                            Live Leaderboard
+                        </h1>
+                    </header>
+
+                    <EmptyState message="The event has not started yet. Please check back later for updates." />
+                </div>
+            </main>
         );
-        setTeams(mapped);
-      })
-      .catch(() => setError("Failed to load scoreboard."))
-      .finally(() => setLoading(false));
-  }, []);
+    }
 
-  const sortedTeams = [...teams].sort((a, b) => b.score - a.score);
-  const teamsWithRank = sortedTeams.map((team, _i, array) => ({
-    ...team,
-    rank: array.findIndex((t) => t.score === team.score) + 1,
-  }));
+    useEffect(() => {
+        fetch("/api/scoreboard")
+            .then((res) => res.json())
+            .then((data) => {
+                const mapped: Team[] = data.scoreboard.map(
+                    (t: {
+                        id: number;
+                        name: string;
+                        totalScore: number;
+                        scores: { game: string; score: number }[];
+                    }) => ({
+                        id: t.id,
+                        name: t.name,
+                        score: t.totalScore,
+                        scores: Object.fromEntries(t.scores.map((s) => [s.game, s.score])),
+                    })
+                );
+                setTeams(mapped);
+            })
+            .catch(() => setError("Failed to load scoreboard."))
+            .finally(() => setLoading(false));
+    }, []);
 
-  const hasTeams = teams.length > 0;
-  const hasScores = teams.some((t) => t.score > 0);
+    const sortedTeams = [...teams].sort((a, b) => b.score - a.score);
+    const teamsWithRank = sortedTeams.map((team, _i, array) => ({
+        ...team,
+        rank: array.findIndex((t) => t.score === team.score) + 1,
+    }));
 
-  return (
-    <main className="relative min-h-screen text-white px-4 py-12 bg-gray-900">
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <CoolBackgroundGlow />
-      </div>
+    const hasTeams = teams.length > 0;
+    const hasScores = teams.some((t) => t.score > 0);
 
-      <div className="relative z-10">
-        {/* Header */}
-        <header className="text-center mb-10">
-          <h1 className="text-4xl font-black tracking-tight">OlympiCS</h1>
-          <h1 className="text-4xl font-black tracking-tight py-4">4/29/26</h1>
-          <h1 className="text-4xl font-black tracking-tight">
-            Live Leaderboard
-          </h1>
-        </header>
+    return (
+        <main className="relative min-h-screen text-white px-4 py-12 bg-gray-900">
+            <div className="absolute inset-0 z-0 pointer-events-none">
+                <CoolBackgroundGlow />
+            </div>
 
-        {/* Toggle button */}
-        <button
-          className="flex mx-auto border px-4 py-1 rounded-lg mt-3 mb-5 hover:bg-white/10 transition-colors"
-          onClick={() =>
-            setView(view === "leaderboard" ? "grid" : "leaderboard")
-          }
-        >
-          {view === "leaderboard" ? "📊 View Grid" : "🏆 View Leaderboard"}
-        </button>
+            <div className="relative z-10">
+                {/* Header */}
+                <header className="text-center mb-10">
+                    <h1 className="text-4xl font-black tracking-tight">OlympiCS</h1>
+                    <h1 className="text-4xl font-black tracking-tight py-4">4/29/26</h1>
+                    <h1 className="text-4xl font-black tracking-tight">
+                        Live Leaderboard
+                    </h1>
+                </header>
 
-        {/* Loading / error states */}
-        {loading && (
-          <p className="text-center text-white/50">Loading scoreboard...</p>
-        )}
-        {error && <p className="text-center text-red-400">{error}</p>}
+                {/* Toggle button */}
+                <button
+                    className="flex mx-auto border px-4 py-1 rounded-lg mt-3 mb-5 hover:bg-white/10 transition-colors"
+                    onClick={() =>
+                        setView(view === "leaderboard" ? "grid" : "leaderboard")
+                    }
+                >
+                    {view === "leaderboard" ? "📊 View Grid" : "🏆 View Leaderboard"}
+                </button>
 
-        {/* Leaderboard view */}
-        {!loading && !error && view === "leaderboard" && (
-          <div>
-            {!hasTeams ? (
-              <EmptyState message="No teams have been accepted yet." />
-            ) : !hasScores ? (
-              <EmptyState message="Scoreboard will be available on event day." />
-            ) : (
-              <section className="text-2xl text-center max-w-2xl mx-auto flex flex-col gap-3">
-                {teamsWithRank.map((team) => (
-                  <TeamRow key={team.id} team={team} rank={team.rank} />
-                ))}
-              </section>
-            )}
-          </div>
-        )}
+                {/* Loading / error states */}
+                {loading && (
+                    <p className="text-center text-white/50">Loading scoreboard...</p>
+                )}
+                {error && <p className="text-center text-red-400">{error}</p>}
 
-        {/* Grid view */}
-        {!loading && !error && view === "grid" && (
-          <div>
-            {!hasTeams ? (
-              <EmptyState message="No teams have been accepted yet." />
-            ) : !hasScores ? (
-              <EmptyState message="Scoreboard will be available on event day." />
-            ) : (
-              <ScoreGrid teams={teamsWithRank} />
-            )}
-          </div>
-        )}
-      </div>
-    </main>
-  );
+                {/* Leaderboard view */}
+                {!loading && !error && view === "leaderboard" && (
+                    <div>
+                        {!hasTeams ? (
+                            <EmptyState message="No teams have been accepted yet." />
+                        ) : !hasScores ? (
+                            <EmptyState message="Scoreboard will be available on event day." />
+                        ) : (
+                            <section className="text-2xl text-center max-w-2xl mx-auto flex flex-col gap-3">
+                                {teamsWithRank.map((team) => (
+                                    <TeamRow key={team.id} team={team} rank={team.rank} />
+                                ))}
+                            </section>
+                        )}
+                    </div>
+                )}
+
+                {/* Grid view */}
+                {!loading && !error && view === "grid" && (
+                    <div>
+                        {!hasTeams ? (
+                            <EmptyState message="No teams have been accepted yet." />
+                        ) : !hasScores ? (
+                            <EmptyState message="Scoreboard will be available on event day." />
+                        ) : (
+                            <ScoreGrid teams={teamsWithRank} />
+                        )}
+                    </div>
+                )}
+            </div>
+        </main>
+    );
 }
