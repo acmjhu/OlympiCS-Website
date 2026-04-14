@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import {auth} from "@/auth";
+import {authOptions} from "@/lib/authOptions";
+import { getServerSession } from "next-auth";
 
 
 interface ScoreInput {
@@ -10,14 +11,16 @@ interface ScoreInput {
 }
 
 export async function POST(req:NextRequest) {
-    const session = await auth();
+    const session = await getServerSession(authOptions);
+     
 
-    const isAdmin = 
-        session?.user.role === "admin" || 
-        (process.env.NODE_ENV === "development" && session?.user.email === "sethwyzy@gmail.com");
+    const isAdmin =
+        session?.user?.role === "admin";
+
+    
 
     if (!isAdmin) {
-        return NextResponse.json({error: "Unauthorized"}, {status: 401});
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     try {
