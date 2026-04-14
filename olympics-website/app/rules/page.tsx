@@ -44,7 +44,7 @@ export default function RulesPage() {
         <div className="max-w-5xl mx-auto">
           {rulesReady ? ( /* if rulesReady = true, display this */
             <>
-              {/* Table of Contents */}
+              {/* Table of Contents (conditional) */}
               <nav
                 className="bg-white rounded-lg shadow-md p-6 sm:p-8 mb-12 border-l-4 border-[#002D72]"
                 aria-label="Table of contents"
@@ -83,7 +83,7 @@ export default function RulesPage() {
                 </ul>
               </nav>
 
-              {/* Rules Sections */}
+              {/* Rules Sections (conditional) */}
               <div className="space-y-12">
                 {sections.map((section, sectionIndex) => (
                   <section
@@ -123,7 +123,7 @@ export default function RulesPage() {
                 ))}
               </div>
 
-              {/* Back to Top Button */}
+              {/* Back to Top Button (conditional) */}
               <div className="mt-12 text-center">
                 <a
                   href="#"
@@ -152,11 +152,8 @@ export default function RulesPage() {
             /* Rules coming soon section */
             <div className="bg-white rounded-lg shadow-md p-12 text-center border-t-4 border-[#002D72] mb-12">
               <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Rules Coming Soon
-              </h2>
-              <p className="text-gray-600 text-lg">
                 Rules coming soon... please check back later!
-              </p>
+              </h2>
             </div> 
           )}
 
