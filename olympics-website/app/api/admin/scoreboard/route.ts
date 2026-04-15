@@ -16,8 +16,7 @@ export async function POST(req:NextRequest) {
 
     const isAdmin =
         session?.user?.role === "admin";
-
-    
+   
 
     if (!isAdmin) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
