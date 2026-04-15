@@ -1,7 +1,6 @@
 'use client'
 
 import { signIn } from 'next-auth/react'
-<<<<<<< HEAD
 import { Suspense, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 
@@ -10,28 +9,17 @@ function LoginButton() {
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get('callbackUrl') || '/'
 
-=======
-import { useState } from 'react'
-
-export default function LoginPage() {
-  const [isLoading, setIsLoading] = useState(false)
->>>>>>> 8fc9790 (spoddar2 set up NextAuth.js authentication (#26))
 
   const handleGoogleSignIn = async () => {
     setIsLoading(true)
     try {
-<<<<<<< HEAD
       await signIn('google', { callbackUrl })
-=======
-      await signIn('google', { callbackUrl: '/' })
->>>>>>> 8fc9790 (spoddar2 set up NextAuth.js authentication (#26))
     } finally {
       setIsLoading(false)
     }
   }
 
   return (
-<<<<<<< HEAD
     <button
       onClick={handleGoogleSignIn}
       disabled={isLoading}
@@ -47,8 +35,6 @@ export default function LoginPage() {
 export default function LoginPage() {
 
   return (
-=======
->>>>>>> 8fc9790 (spoddar2 set up NextAuth.js authentication (#26))
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4">
       <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-md">
         <div className="text-center mb-8">
@@ -56,11 +42,7 @@ export default function LoginPage() {
           <p className="text-gray-600">Sign in to your account</p>
         </div>
 
-<<<<<<< HEAD
         {/* <button
-=======
-        <button
->>>>>>> 8fc9790 (spoddar2 set up NextAuth.js authentication (#26))
           onClick={handleGoogleSignIn}
           disabled={isLoading}
           className="w-full flex items-center justify-center gap-3 px-6 py-3 bg-white border-2 border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
@@ -84,14 +66,10 @@ export default function LoginPage() {
             />
           </svg>
           {isLoading ? 'Signing in...' : 'Sign in with Google'}
-<<<<<<< HEAD
         </button> */}
         <Suspense>
           <LoginButton />
         </Suspense>
-=======
-        </button>
->>>>>>> 8fc9790 (spoddar2 set up NextAuth.js authentication (#26))
 
         <div className="mt-6 text-center text-sm text-gray-600">
           <p>By signing in, you agree to our terms of service</p>
@@ -99,8 +77,4 @@ export default function LoginPage() {
       </div>
     </div>
   )
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 8fc9790 (spoddar2 set up NextAuth.js authentication (#26))
