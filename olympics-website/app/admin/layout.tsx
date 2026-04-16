@@ -16,7 +16,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     { name: "Scoreboard", href: "/admin/scoreboard" },
     { name: "Settings", href: "/admin/settings" },
   ];
-
+cd ol
   return (
     <div className="flex min-h-screen bg-zinc-950 text-white">
       <aside className="w-64 border-r border-zinc-800 bg-black fixed h-full flex flex-col">
