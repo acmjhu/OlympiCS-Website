@@ -41,7 +41,7 @@ export default function Navbar() {
                 ))}
                 {session ? (
                     <div className="flex items-center gap-4">
-                        <span className="text-gray-700 font-medium">{session.user?.name}</span>
+                        <span className="text-gray-700 font-medium">{session.user?.email}</span>
                         <SignOutButton />
                     </div>
                 ) : (
@@ -71,7 +71,7 @@ export default function Navbar() {
                 ))}
                 {session ? (
                     <div className="flex flex-col items-center gap-4 mt-6">
-                        <span className="text-2xl text-gray-700 font-medium">{session.user?.name}</span>
+                        <span className="text-2xl text-gray-700 font-medium">{session.user?.email}</span>
                         <SignOutButton variant="compact" />
                     </div>
                 ) : (
