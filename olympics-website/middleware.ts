@@ -2,7 +2,7 @@ import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const ADMIN_EMAILS = ["egeeskisar@gmail.com", "jhuacmofficers@gmail.com"];
+const ADMIN_EMAILS = ["egeeskisar@gmail.com", "jhuacmofficers@gmail.com", "sethwyzy@gmail.com"];
 // const HARDCODED_SECRET = "ege_override_secret_123456789"; 
 // Do not use this secret, I put it here for debugging, it is highly unsecure; but it is guaranteed to work
 
