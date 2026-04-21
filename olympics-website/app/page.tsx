@@ -133,21 +133,21 @@ export default function Home() {
         <p className="mt-6 text-lg text-gray-300">
           This website was developed during ACM's Spring 2026 Coding Circles. Check out our other Coding Circle's product here: 
         </p>
-        <div className="mt-8 flex flex-col sm:flex-row justify-center items-center gap-6 text-gray-300">
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-gray-300">
 
           {developersContent.sections.map((item: developerItem, index: number) => (
             <div key={index} className="p-4 bg-gray-800 rounded-lg shadow-md">
-              <p className="mt-0 text-lg text-gray-300">
+              <p style={{ fontWeight: 'bold'/*, textDecoration: 'underline'*/ }}className="mt-0 text-lg text-gray-300">
                 {item.name}
               </p>
-              <p className="mt-6 text-lg text-gray-300">
-                {item.grad_year}
+              <p className="mt-4 text-lg text-gray-300">
+                <i>Graduation year:</i> {item.grad_year}
               </p>
-              <p className="mt-6 text-lg text-gray-300">
-                {item.role}
+              <p className="mt-4 text-lg text-gray-300">
+                <i>Role:</i> {item.role}
               </p>
-              <p className="mt-6 text-lg text-gray-300">
-                {item.major}
+              <p className="mt-4 text-lg text-gray-300">
+                <i>Major:</i> {item.major}
               </p>
               
             </div>

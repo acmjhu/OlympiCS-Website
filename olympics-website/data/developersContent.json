@@ -1,25 +1,37 @@
 { 
     "sections": [
         {
-            "name": "Yum",
+            "name": "Spencer",
+            "grad_year": "2027",
+            "role": "big boss",
+            "major": "Computer Science"
+        },
+        {
+            "name": "Seth",
             "grad_year": "2XXX",
             "role": "big boss",
             "major": "maybe?"
         },
         {
-            "name": "yam",
+            "name": "Ege",
             "grad_year": "2XXX",
             "role": "big boss",
             "major": "maybe?"
         },
         {
-            "name": "yim",
+            "name": "Michelle",
             "grad_year": "2XXX",
             "role": "big boss",
             "major": "maybe?"
         },
         {
-            "name": "yom",
+            "name": "John",
+            "grad_year": "2XXX",
+            "role": "big boss",
+            "major": "maybe?"
+        },
+        {
+            "name": "Kent",
             "grad_year": "2XXX",
             "role": "big boss",
             "major": "maybe?"
