@@ -25,20 +25,24 @@ export default function AdminScoreboardClient({ games }: { games: GameInfo[] }) 
     const [scores, setScores] = useState<Record<number, number>>({});
 
       const handleSave = async () => {
-        if (!activeGame) return;
+        if (!activeGame || !activeGame.id) return;
 
-        
+        const gameIdInt = parseInt(activeGame.id);
+        if (isNaN(gameIdInt)) {
+          console.error("Invalid Game ID");
+        return;
+        }
 
         const payload = activeGame.teams.map((team) => {
-        const baseScore = scores[team.id] ?? 0;
-        const penaltyScore = penaltyTotals[team.id] ?? 0;
+          const baseScore = scores[team.id] ?? 0;
+          const penaltyScore = penaltyTotals[team.id] ?? 0;
     
-        return {
-          teamId: team.id,
-          eventGamesId: parseInt(activeGame.id),
-          scoreValue: baseScore - penaltyScore, // Net score calculated before sending
-        };
-      });
+          return {
+            teamId: team.id,
+            eventGamesId: gameIdInt,
+            scoreValue: baseScore - penaltyScore, // Net score calculated before sending
+          };
+        });
 
         const res = await fetch("/api/admin/scoreboard", {
             method: "POST", 
