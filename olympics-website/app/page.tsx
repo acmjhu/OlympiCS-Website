@@ -4,9 +4,14 @@ import homeContent from "../data/homeContent.json";
 import Image from 'next/image';
 import JHULogo from "./favicon.png";
 import Link from 'next/link'
+import developersContent from "@/data/developersContent.json"; 
 
-
-
+interface developerItem {
+  name: string;
+  grad_year: string;
+  role: string;
+  major: string;
+}
 
 
 export default function Home() {
@@ -116,6 +121,37 @@ export default function Home() {
           <div className="p-4 bg-gray-800 rounded-lg shadow-md">
             WiCS
           </div>
+        </div>
+      </section>
+
+      {/* Developers Shoutout Section / placeholder, will put this back in homecontent.json */} 
+      /* Stuff to include: name, graduation year,  */
+      <section id="developers" className="mx-auto max-w-5xl px-6 py-24 text-center">
+        <h2 className="text-3xl sm:text-4xl font-bold text-white">
+          Shoutout to Our Website Developers! 
+        </h2>
+        <p className="mt-6 text-lg text-gray-300">
+          This website was developed during ACM's Spring 2026 Coding Circles. Check out our other Coding Circle's product here: 
+        </p>
+        <div className="mt-8 flex flex-col sm:flex-row justify-center items-center gap-6 text-gray-300">
+
+          {developersContent.sections.map((item: developerItem, index: number) => (
+            <div key={index} className="p-4 bg-gray-800 rounded-lg shadow-md">
+              <p className="mt-0 text-lg text-gray-300">
+                {item.name}
+              </p>
+              <p className="mt-6 text-lg text-gray-300">
+                {item.grad_year}
+              </p>
+              <p className="mt-6 text-lg text-gray-300">
+                {item.role}
+              </p>
+              <p className="mt-6 text-lg text-gray-300">
+                {item.major}
+              </p>
+              
+            </div>
+          ))}
         </div>
       </section>   
     </div>

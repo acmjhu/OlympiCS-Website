@@ -1,0 +1,28 @@
+{ 
+    "sections": [
+        {
+            "name": "Yum",
+            "grad_year": "2XXX",
+            "role": "big boss",
+            "major": "maybe?"
+        },
+        {
+            "name": "yam",
+            "grad_year": "2XXX",
+            "role": "big boss",
+            "major": "maybe?"
+        },
+        {
+            "name": "yim",
+            "grad_year": "2XXX",
+            "role": "big boss",
+            "major": "maybe?"
+        },
+        {
+            "name": "yom",
+            "grad_year": "2XXX",
+            "role": "big boss",
+            "major": "maybe?"
+        }
+    ]
+}
