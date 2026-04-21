@@ -1,18 +1,18 @@
 // Admin Scoreboard Controls, AdminScoreboardClient.tsx
 "use client";
-import games from "@/data/game_list.json"
+// import games from "@/data/game_list.json"
 import {  useEffect, useState } from "react";
 
-
-
+interface TeamInfo { id: number; name: string; }
+interface GameInfo {id: string; label: string; teams: TeamInfo[]; }
   interface Penalty {
-        team:string;
+        teamId: number;
         reason: string;
         points: number;
     } 
 
 
-export default function AdminScoreboardClient() {
+export default function AdminScoreboardClient({ games }: { games: GameInfo[] }) {
   
     const [selectedGameId, setSelectedGameId] = useState("");
     
@@ -22,26 +22,25 @@ export default function AdminScoreboardClient() {
 
     const [saved, setSaved] = useState(false);
 
-    const [scores, setScores] = useState<Record<string, number>>({});
+    const [scores, setScores] = useState<Record<number, number>>({});
 
-    const handleSave = async () => {
+      const handleSave = async () => {
         if (!activeGame) return;
 
-        const scorePayload = activeGame.teams.map((team) => ({
-            teamId: team, 
-            eventGamesId: activeGame!.id, 
-            scoreValue: scores[team] ?? 0,
-        }));
+        
 
-        const penaltyPayload = penalties.map((p) => ({
-            teamId: p.team, 
-            eventGamesId: activeGame!.id, 
-            scoreValue: -(p.points ?? 0),
-        }));
+        const payload = activeGame.teams.map((team) => {
+        const baseScore = scores[team.id] ?? 0;
+        const penaltyScore = penaltyTotals[team.id] ?? 0;
+    
+        return {
+          teamId: team.id,
+          eventGamesId: parseInt(activeGame.id),
+          scoreValue: baseScore - penaltyScore, // Net score calculated before sending
+        };
+      });
 
-        const payload = [...scorePayload, ...penaltyPayload];
-
-        const res = await fetch("/api/admin/scores", {
+        const res = await fetch("/api/admin/scoreboard", {
             method: "POST", 
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(payload),
@@ -51,12 +50,14 @@ export default function AdminScoreboardClient() {
             setSaved(true);
             setPenalties([]);
             setTimeout(() => setSaved(false) ,2000); 
+        } else {
+            console.error("Failed to save, status:", res.status);
         }
     };
 
     const addPenalty = () => {
         if (!activeGame || activeGame.teams.length === 0) return;
-        setPenalties([...penalties, { team: activeGame.teams[0], reason: "", points: 0 }]);
+        setPenalties([...penalties, { teamId: activeGame.teams[0].id, reason: "", points: 0 }]);
     };
 
     const updatePenalty = (index: number, field: keyof Penalty, value: string | number) => {
@@ -74,26 +75,26 @@ export default function AdminScoreboardClient() {
     useEffect(() => {
         if (!activeGame) return;
         const fetchScores = async () => {
-            const res = await fetch (`/api/admin/scores?eventGamesId=${activeGame.id}`);
+            const res = await fetch(`/api/admin/scoreboard?eventGamesId=${activeGame.id}`);
             const data = await res.json();
-            const mapped: Record<string, number> = {};
-            data.forEach((s: {teamId: string; score:number }) =>{
+            const mapped: Record<number, number> = {};
+            data.forEach((s: {teamId: number; score:number }) =>{
                 mapped[s.teamId] = s.score;
             });
             setScores(mapped);
         };
         fetchScores();
-    }, [selectedGameId]);
+    }, [selectedGameId, activeGame]);
 
-    const penaltyTotals = penalties.reduce<Record<string, number>>((acc,p) => {
-        acc[p.team] = (acc[p.team] ?? 0) + (p.points || 0);
+    const penaltyTotals = penalties.reduce<Record<number, number>>((acc,p) => {
+        acc[p.teamId] = (acc[p.teamId] ?? 0) + (p.points || 0);
         return acc;
     }, {});
 
     const previewScores = activeGame 
         ? [...activeGame.teams].map((team) => ({
             team, 
-            total: (scores[team] ?? 0) - (penaltyTotals[team] ?? 0),
+            total: (scores[team.id] ?? 0) - (penaltyTotals[team.id] ?? 0),
         })).sort((a,b) => b.total - a.total) : [];
 
 return (
@@ -134,17 +135,17 @@ return (
       <div className="mt-4 p-4 bg-gray-800 rounded">
         <h3 className="font-bold text-white">{activeGame.label} Teams</h3>
         <ul className="space-y-3">
-          {activeGame.teams.map((team, index) => (
-            <div key={index} className="flex items-center justify-between gap-4">
+          {activeGame.teams.map((team) => (
+            <li key={team.id} className="flex items-center justify-between gap-4">
               <label className="font-medium text-gray-200 min-w-[100px]">
-                {team}
+                {team.name}
               </label>
               <input
                 type="number"
-                value={scores[team] ?? ""}
-                onChange={(e) => setScores({ ...scores, [team]: parseInt(e.target.value) })}
+                value={scores[team.id] ?? ""}
+                onChange={(e) => setScores({ ...scores, [team.id]: parseInt(e.target.value) || 0})}
                 className="w-24 p-2 border border-gray-500 rounded-md bg-gray-600 text-white focus:border-blue-400 outline-none text-center"/>
-            </div>
+            </li>
           ))}
         </ul>
 
@@ -171,19 +172,19 @@ return (
 
             <div className="grid grid-cols-2 gap-2">
               <select
-                value={penalty.team}
-                onChange={(e) => updatePenalty(idx, "team", e.target.value)}
+                value={penalty.teamId}
+                onChange={(e) => updatePenalty(idx, "teamId", parseInt(e.target.value) || 0)}
                 className="p-2 text-sm border border-gray-500 rounded bg-gray-600 text-white">
                 {activeGame.teams.map((team) => (
-                  <option key={team} value={team}>{team}</option>
+                  <option key={team.id} value={team.id}>{team.name}</option>
                 ))}
               </select>
 
               <input
                 type="number"
                 placeholder="points"
-                value={penalty.points}
-                onChange={(e) => updatePenalty(idx, "points", e.target.value)}
+                value={penalty.points === 0 ? "" : penalty.points}
+                onChange={(e) => updatePenalty(idx, "points", parseInt(e.target.value) || 0)}
                 className="p-2 text-sm border border-gray-500 rounded bg-gray-600 text-white"/>
             </div>
 
@@ -207,8 +208,8 @@ return (
         <div className="mt-8">
           <h3 className="font-bold text-white">Live Preview</h3>
           {previewScores.map(({ team, total }, rank) => (
-            <div key={team} className="flex justify-between text-gray-200">
-              <span>{rank + 1}. {team}</span>
+            <div key={team.id} className="flex justify-between text-gray-200">
+              <span>{rank + 1}. {team.name}</span>
               <span>{total}</span>
             </div>
           ))}

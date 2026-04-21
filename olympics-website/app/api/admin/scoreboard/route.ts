@@ -15,7 +15,7 @@ export async function POST(req:NextRequest) {
      
 
     const isAdmin =
-        session?.user?.role === "admin" || (session?.user.email !== "jhuacmofficers@gmail.com" && session?.user.email !== "sethwyzy@gmail.com");
+        session?.user?.role === "admin" || session?.user?.email === "jhuacmofficers@gmail.com" || session?.user?.email === "sethwyzy@gmail.com";
    
 
     if (!isAdmin) {
@@ -25,7 +25,11 @@ export async function POST(req:NextRequest) {
     try {
         const scores: ScoreInput[] = await req.json();
 
-        const upserts = scores.map((item) =>
+        const validScores = scores.filter(item => 
+            !isNaN(item.scoreValue) && item.teamId && item.eventGamesId
+        );
+
+        const upserts = validScores.map((item) =>
         prisma.score.upsert({
             where: {
                 teamId_eventGamesId: {
