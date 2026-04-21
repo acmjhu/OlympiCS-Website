@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth";
 
 export default async function AdminScoreboard() {
     const session = await getServerSession(); 
-    if (!session || (session.user.email !== "jhuacmofficers@gmail.com" && session.user.email !== "sethwyzy@gmail.com")) {
+    if (!session || (session.user.email !== "jhuacmofficers@gmail.com" && session.user.email !== "sethwyzy@gmail.com" && session.user.email !== "michellewang375@gmail.com")) {
         redirect("/403");
     } 
     return <AdminScoreboardClient/>
