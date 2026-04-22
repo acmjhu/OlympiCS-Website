@@ -1,4 +1,4 @@
-import { Pool } from '@neondatabase/serverless';
+import { neon } from '@neondatabase/serverless';
 import { PrismaNeon } from '@prisma/adapter-neon';
 import { PrismaClient } from '@/app/generated/prisma/client';
 
@@ -10,13 +10,13 @@ const handler: ProxyHandler<object> = {
   get(_target, prop) {
     const databaseUrl = process.env.DATABASE_URL;
     if (!databaseUrl) throw new Error('DATABASE_URL is not set');
-    
+
     if (!globalThis.prismaGlobal) {
-      const pool = new Pool({ connectionString: databaseUrl });
-      const adapter = new PrismaNeon(pool);
+      const sql = neon(databaseUrl);
+      const adapter = new PrismaNeon(sql);
       globalThis.prismaGlobal = new PrismaClient({ adapter });
     }
-    
+
     return (globalThis.prismaGlobal as any)[prop];
   }
 };
