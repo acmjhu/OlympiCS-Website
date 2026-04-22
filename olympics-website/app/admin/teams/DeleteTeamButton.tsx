@@ -1,7 +1,9 @@
 "use client";
+
 import { useTransition } from "react";
 import { deleteTeam } from "./actions";
-export default function DeleteTeamButton({ teamId }: { teamId: string }) {
+
+export default function DeleteTeamButton({ teamId }: { teamId: number }) {
   const [isPending, startTransition] = useTransition();
 
   const handleDelete = () => {

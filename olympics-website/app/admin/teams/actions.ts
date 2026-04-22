@@ -3,7 +3,7 @@
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
-export async function deleteTeam(teamId: string) {
+export async function deleteTeam(teamId: number) {
   try {
     await prisma.team.delete({
       where: { id: teamId },
@@ -17,14 +17,14 @@ export async function deleteTeam(teamId: string) {
 
 export async function createTeam(formData: FormData) {
   const name = formData.get("name") as string;
-
+  
   if (!name || name.trim() === "") return;
 
   try {
     await prisma.team.create({
       data: {
         name: name.trim(),
-        status: "PENDING",
+        status: "PENDING", 
       },
     });
     revalidatePath("/admin/teams");

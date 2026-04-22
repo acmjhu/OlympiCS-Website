@@ -4,9 +4,8 @@ import AddTeamForm from "./AddTeamForm";
 
 export const dynamic = "force-dynamic";
 
-// Tell TypeScript exactly what this object looks like to bypass the build error
 type Team = {
-  id: string;
+  id: number;
   name: string;
   status: string | null;
 };
