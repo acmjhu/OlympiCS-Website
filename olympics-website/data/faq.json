@@ -29,7 +29,27 @@
             "id": "is-it-free",
             "Question": "Is it free?",
             "Answer": "Yes! OlympiCS is completely free to attend. All food, drinks, and supplies will be provided."
+        },
+        {
+            "id": "if-it-rains",
+            "Question": "What happens if it rains?",
+            "Answer": "We have a rain plan! If it rains, or there is any other bad weather, we will move indoors to Saloon C. An announcement will be emailed to all participants if this happens."
+        },
+        {
+            "id": "what-if-i-cant-make-it",
+            "Question": "What if I can't make it?",
+            "Answer": "If you can't make it, please let us know as soon as possible so we can give your spot to someone else."
+        },
+        {
+            "id": "i-signed-up-but-my-friends-did-not",
+            "Question": "I signed up but my friends didn't, can we still be on the same team?",
+            "Answer": "Yes! If you signed up individually but would like to be on the same team as your friends, please email us at jhuacmofficers@gmail.com and we will do our best to accommodate your request."
+        },
+        {
+            "id": "what-is-next-steps",
+            "Question": "I signed up, what is next?",
+            "Answer": "Once you have signed up, you will receive an email with more information about the event a few days before!"
         }
     ],
-    "lastUpdated": "2026-04-06"
+    "lastUpdated": "2026-04-20"
 }

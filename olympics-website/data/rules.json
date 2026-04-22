@@ -4,66 +4,76 @@
             "id": "general-rules",
             "title": "General Rules",
             "rules": [
-                "b",
-                "a"
-            ]
-        },
-        {
-            "id": "team-rules",
-            "title": "Team Rules",
-            "rules": [
-                "a",
-                "b"
-            ]
-        },
-        {
-            "id": "scoring",
-            "title": "Scoring System",
-            "rules": [
-                "a",
-                "b"
-            ]
-        },
-        {
-            "id": "code-of-conduct",
-            "title": "Code of Conduct",
-            "rules": [
-                "a",
-                "b"
-            ]
-        },
-        {
-            "id": "technical-requirements",
-            "title": "Technical Requirements",
-            "rules": [
-                "a",
-                "b"
+                "Teams should consist of 3-4 members.",
+                "Each game will be scored individually, according to F1 rules. Teams will earn 25 points for first place, 18 for second, 15 for third, 12 for fourth, 10 for fifth, 8 for sixth, 6 for seventh, 4 for eighth, 2 for ninth, and 1 for tenth.",
+                "The team with the most points at the end of the competition will be crowned the OlympiCS Champions!",
+                "See specific game sections for how each game will be scored."
             ]
         },
         {
             "id": "day-of-logistics",
             "title": "Day-of Logistics",
             "rules": [
-                "a",
-                "b"
+                "Participants MUST be checked in by 11am, or risk disqualification from certain games that require pre-planning.",
+                "Please report to Kieser Quad for check-in.",
+                "Lunch will be provided for all participants.",
+                "There will be volunteers in blue shirts available to answer any questions you may have."
             ]
         },
         {
             "id": "prizes-awards",
             "title": "Prizes & Awards",
             "rules": [
-                "a",
-                "b"
+                "The top 3 teams will receive prizes, and also have their names placed on the OlympCS Website.",
+                "Winners will be announced during the final awards ceremony.",
+                "There will be a prize pool of ~15 prizes, the winning team will receive first pick of the prizes, second place will receive second pick, and so on."
             ]
         },
         {
-            "id": "contact-support",
-            "title": "Contact & Support",
+            "id": "pictionary-rules",
+            "title": "Pictionary Rules",
             "rules": [
-                "a",
-                "b"
+                "There will be 5 rounds of pictionary.",
+                "Each round teams will be paired up to compete against each other.",
+                "In each game, each team must designate a drawer, and the rest of the team will be guessing.",
+                "In each game, there will be a word list of 20 words. The drawer will draw words from the list, and the rest of the team will guess the word. The drawer may not speak or make any noises, and may only communicate through drawings.",
+                "The drawer can any word from the list at any time, and can switch words whenever they want.",
+                "The first team to guess 6 words wins the round.",
+                "Once a word has been guessed by either team, it is removed from the list. If a drawer was drawing a word that got guessed by the other team, they must then switch.",
+                "The overall winners will be decided by who has the best record, with ties broken by shortest average game length."
+            ]
+        },
+        {
+            "id": "pseudocode-telephone-rules",
+            "title": "Pseudocode Telephone Rules",
+            "rules": [
+                "Teams will be combined to create mega teams of size 6-8.",
+                "Before the game begins, you will be given 5 minutes to strategize with your new team.",
+                "The first person in your team will receive a set of documentation. If your team has an even number of people, they will write pseudocode, if your team has an odd number of people, they will write code",
+                "After the first person has written their pseudocode/code, they will pass it to the next person in the team, who will then write code/pseudocode based on the previous person's work.",
+                "This process will continue until everyone in the team has had a chance to write pseudocode/code.",
+                "The part of the team writing code will stand on one side of Kieser Quad, and the part of the team writing pseudocode will stand on the other side. You must run to the other side to pass your work to the next person.",
+                "You may not use any external resources, including the internet, to help you write your pseudocode/code.",
+                "All code/pseudocode must be handwritten, you will receive paper and pens.",
+                "No communication is allowed between team members. Violators will receive a penalty.",
+                "The last person in the team will then present their work (should be code) to the judges.",
+                "The judges will run a series of language agnostic I/O tests on the code.",
+                "Teams will receive points based on how many test cases pass, with ties broken by whoever finishes first. Points will be equally distributed among the composed teams."
+            ]
+        },
+        {
+            "id": "scavenger-hunt-rules",
+            "title": "Scavenger Hunt Rules",
+            "rules": [
+                "Each team will receive a physical copy of hints to start the scavenger hunt.",
+                "There will be volunteers stationed at each location. You must take a selfie with the volunteer to prove you were there.",
+                "The first team to arrive at some locations will receive an extra prize.",
+                "Your entire team must be present at each location to receive credit for that location. But you may split up to travel between locations.",
+                "You may visit locations in any order.",
+                "Score will be determined by the number of locations visited. With ties broken by whoever returns to Kieser Quad first.",
+                "None of the locations require crossing a road off of Homewood campus."
             ]
         }
     ],
-    "lastUpdated": "2026-02-21 (Rules are being finalized, please check back soon)"
+    "lastUpdated": "2026-04-20"
 }

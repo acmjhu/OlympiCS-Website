@@ -1,21 +1,11 @@
-import { PrismaNeonHttp } from '@prisma/adapter-neon'
-import { PrismaClient } from '@/app/generated/prisma/client'
+import { PrismaClient } from '@prisma/client'
 
-declare global {
-    var prismaGlobal: undefined | PrismaClient
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClient | undefined
 }
 
-const handler: ProxyHandler<object> = {
-    get(_target, prop) {
-        const databaseUrl = process.env.DATABASE_URL
-        if (!databaseUrl) throw new Error('DATABASE_URL is not set')
-        if (!globalThis.prismaGlobal) {
-            const adapter = new PrismaNeonHttp(databaseUrl, {})
-            globalThis.prismaGlobal = new PrismaClient({ adapter })
-        }
-        return (globalThis.prismaGlobal as any)[prop]
-    }
-}
+export const prisma = globalForPrisma.prisma ?? new PrismaClient()
 
-const prisma = new Proxy({} as PrismaClient, handler) as PrismaClient
-export default prisma
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
+
+export default prisma;

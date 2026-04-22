@@ -1,51 +1,44 @@
 [
-  {
-    "time": "10:30 AM",
-    "event": "Check-in",
-    "description": "Arrive and check your team in",
-    "type": "ceremony"
-  },
-  {
-      "time": "11:00 AM",
-      "event": "Opening Ceremony",
-      "description": "Introduction and description of competition.",
-      "type": "ceremony"
-  },
-  {
-    "time": "11:05 AM",
-    "event": "Round 1: Pictionary",
-    "description": "Round-robin styled pictionary tournament. See rules for more details.",
-    "type": "competition"
-  },
-  {
-    "time": "11:45 AM",
-    "event": "Round 2: Code Telephone",
-    "description": "Traditional telephone game, but with code. See rules for more details.",
-    "type": "competition"
-  },
-  {
-    "time": "12:30 PM",
-    "event": "Lunch & Department Awards",
-    "description": "Enjoy catered pizza! Department awards will be announced during this time.",
-    "type": "break"
-  },
-  {
-    "time": "1:30 PM",
-    "event": "Round 3: Scavenger Hunt",
-    "description": "Teams will search for hidden items around campus. See rules for more details.",
-    "type": "competition"
-  },
-  {
-    "time": "2:15 PM",
-    "event": "Winners Announced & Closing Ceremony",
-    "description": "Winners of the competition will be announced and closing remarks will be given.",
-    "type": "ceremony"
-  },
-  {
-    "time": "2:45 PM",
-    "event": "Games End",
-    "description": "Thank you for participating! We hope to see you again next year.",
-    "type": "break"
-  }
+    {
+        "time": "10:00 AM - 11:00 AM",
+        "event": "Check-in",
+        "description": "Arrive and check your team in.",
+        "type": "ceremony"
+    },
+    {
+        "time": "11:00 AM - 11:45 AM",
+        "event": "Awards Ceremony",
+        "description": "Department awards and description of competition.",
+        "type": "ceremony"
+    },
+    {
+        "time": "11:45 AM - 12:30 PM",
+        "event": "Pictionary",
+        "description": "Round-robin styled pictionary tournament. See rules for more details.",
+        "type": "competition"
+    },
+    {
+        "time": "12:30 PM - 1:30 PM",
+        "event": "Lunch",
+        "description": "Fuel up for the next 2 games!",
+        "type": "break"
+    },
+    {
+        "time": "1:30 PM - 2:15 PM",
+        "event": "Pseudocode Telephone",
+        "description": "Traditional telephone game, but with code. See rules for more details.",
+        "type": "competition"
+    },
+    {
+        "time": "2:15 PM - 2:45 PM",
+        "event": "Scavenger Hunt",
+        "description": "Teams will search for hidden items around campus. See rules for more details.",
+        "type": "competition"
+    },
+    {
+        "time": "2:45 PM - 3:30 PM",
+        "event": "Prizes & Closing Ceremony",
+        "description": "Winners of the competition will be announced and closing remarks will be given.",
+        "type": "ceremony"
+    }
 ]
-  
