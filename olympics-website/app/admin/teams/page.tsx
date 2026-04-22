@@ -1,7 +1,16 @@
 import prisma from "@/lib/prisma";
 import DeleteTeamButton from "./DeleteTeamButton";
 import AddTeamForm from "./AddTeamForm";
+
 export const dynamic = "force-dynamic";
+
+// Tell TypeScript exactly what this object looks like to bypass the build error
+type Team = {
+  id: string;
+  name: string;
+  status: string | null;
+};
+
 export default async function TeamsPage() {
   const teams = await prisma.team.findMany({
     orderBy: { id: "desc" },
@@ -31,7 +40,7 @@ export default async function TeamsPage() {
                 </td>
               </tr>
             ) : (
-              teams.map((team) => (
+              teams.map((team: Team) => (
                 <tr key={team.id} className="hover:bg-zinc-800/50 transition-colors">
                   <td className="px-6 py-4 text-white">{team.name}</td>
                   <td className="px-6 py-4">
