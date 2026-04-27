@@ -3,12 +3,10 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 const ADMIN_EMAILS = ["egeeskisar@gmail.com", "jhuacmofficers@gmail.com", "sethwyzy@gmail.com"];
-// const HARDCODED_SECRET = "ege_override_secret_123456789"; 
-// Do not use this secret, I put it here for debugging, it is highly unsecure; but it is guaranteed to work
 
 export async function middleware(req: NextRequest) {
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-  
+
   const email = token?.email;
   const isAdmin = !!(email && ADMIN_EMAILS.includes(email));
 
@@ -26,6 +24,6 @@ export async function middleware(req: NextRequest) {
   return NextResponse.next();
 }
 
-export const config = { 
-  matcher: ["/admin/:path*"] 
+export const config = {
+  matcher: ["/admin/:path*"]
 };
