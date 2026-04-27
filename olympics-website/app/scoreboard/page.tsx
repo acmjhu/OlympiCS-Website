@@ -13,7 +13,7 @@ export default function ScoreboardPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    const isEventLive = true;
+    const isEventLive = false;
 
     if (!isEventLive) {
         return (
