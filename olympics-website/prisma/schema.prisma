@@ -20,6 +20,8 @@ model Game {
   id          Int          @id @default(autoincrement())
   name        String
   description String?
+  date        DateTime
+  location    String
   eventGames  EventGames[]
 }
 
@@ -99,6 +101,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Account {
