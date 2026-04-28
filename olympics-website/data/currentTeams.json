@@ -1,0 +1,63 @@
+[
+    {
+        "name": "Team 1",
+        "members": [
+            "John L",
+            "Albert J",
+            "Caden D",
+            "Manuel P"
+        ]
+    },
+    {
+        "name": "Net Ninjas",
+        "members": [
+            "Matthew W",
+            "Debjeet C",
+            "Rizky",
+            "Harsh A"
+        ]
+    },
+    {
+        "name": "Sagava1",
+        "members": [
+            "Saketh A",
+            "Nhan T",
+            "Tommy H"
+        ]
+    },
+    {
+        "name": "Sagava2",
+        "members": [
+            "Lucas F",
+            "Kamal B",
+            "Steve W",
+            "Kevin H"
+        ]
+    },
+    {
+        "name": "Team 2",
+        "members": [
+            "Misha Z",
+            "Wendy X",
+            "Pahan D"
+        ]
+    },
+    {
+        "name": "Team 3",
+        "members": [
+            "Randima B",
+            "Joseph",
+            "Ronald G"
+        ]
+    },
+    {
+        "name": "Team 4",
+        "members": [
+            "Dayana M",
+            "Shawn G",
+            "Samuel H",
+            "Alex M",
+            "Sophia M"
+        ]
+    }
+]

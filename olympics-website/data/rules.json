@@ -62,18 +62,13 @@
             ]
         },
         {
-            "id": "scavenger-hunt-rules",
-            "title": "Scavenger Hunt Rules",
+            "id": "cs-trivia",
+            "title": "CS Trivia Rules",
             "rules": [
-                "Each team will receive a physical copy of hints to start the scavenger hunt.",
-                "There will be volunteers stationed at each location. You must take a selfie with the volunteer to prove you were there.",
-                "The first team to arrive at some locations will receive an extra prize.",
-                "Your entire team must be present at each location to receive credit for that location. But you may split up to travel between locations.",
-                "You may visit locations in any order.",
-                "Score will be determined by the number of locations visited. With ties broken by whoever returns to Kieser Quad first.",
-                "None of the locations require crossing a road off of Homewood campus."
+                "CS Trivia is being finalized. Check back soon!",
+                "More information will be announced during the event."
             ]
         }
     ],
-    "lastUpdated": "2026-04-20"
+    "lastUpdated": "2026-04-28"
 }
