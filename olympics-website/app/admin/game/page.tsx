@@ -4,8 +4,10 @@ import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 
+
 interface Game {
-  _id: string;
+  _id?: string;
+  id?: number;
   name: string;
   date: string;
   location: string;
@@ -18,16 +20,22 @@ export default function AdminGames() {
 
   useEffect(() => {
     if (status === 'loading') return;
-    if (!session) redirect('/auth/signin'); //redirecting
+    if (!session) redirect('/auth/signin');
+    
+    const isAdmin =
+      session?.user?.role === "admin" || 
+      (session?.user?.email === "jhuacmofficers@gmail.com" || session?.user?.email === "sethwyzy@gmail.com" ||  session?.user?.email === "michellewang375@gmail.com");
+    
+    if (!isAdmin) redirect('/');
 
-    fetch('/api/games')
+    fetch('/api/game')
       .then(res => res.json())
       .then(setGames);
   }, [session, status]);
 
   const addGame = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await fetch('/api/games', {
+    const res = await fetch('/api/game', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),
@@ -38,9 +46,9 @@ export default function AdminGames() {
     }
   };
 
-  const deleteGame = async (id: string) => {
-    await fetch(`/api/games/${id}`, { method: 'DELETE' });
-    setGames(games.filter(g => g._id !== id));
+  const deleteGame = async (id: string | number) => {
+    await fetch(`/api/game/${id}`, { method: 'DELETE' });
+    setGames(games.filter(g => (g._id || g.id) !== id));
   };
 
   if (status === 'loading') return <p>Loading...</p>;
@@ -51,7 +59,7 @@ export default function AdminGames() {
       <form onSubmit={addGame}>
         <input
           type="text"
-          placeholder="Game Name"
+          placeholder="Game name"
           value={form.name}
           onChange={e => setForm({ ...form, name: e.target.value })}
           required
@@ -73,9 +81,9 @@ export default function AdminGames() {
       </form>
       <ul>
         {games.map(game => (
-          <li key={game._id}>
-            {game.name} - {game.date} - {game.location}
-            <button onClick={() => deleteGame(game._id)}>Delete</button>
+          <li key={game._id || game.id}>
+            {game.name} - {new Date(game.date).toLocaleDateString()} - {game.location}
+            <button onClick={() => deleteGame(game._id || game.id!)}>Delete</button>
           </li>
         ))}
       </ul>
