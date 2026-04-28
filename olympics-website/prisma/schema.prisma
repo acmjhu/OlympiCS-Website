@@ -20,15 +20,17 @@ model Game {
   id          Int          @id @default(autoincrement())
   name        String
   description String?
+  pointValue  Int          @default(0)
   eventGames  EventGames[]
 }
 
 model Event {
-  id         Int          @id @default(autoincrement())
-  name       String
-  year       Int
-  teams      Team[]
-  eventGames EventGames[]
+  id           Int          @id @default(autoincrement())
+  name         String
+  year         Int
+  registration Boolean      @default(true)
+  teams        Team[]
+  eventGames   EventGames[]
 }
 
 model Team {
