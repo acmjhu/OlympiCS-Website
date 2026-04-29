@@ -13,7 +13,7 @@ export default function ScoreboardPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    const isEventLive = false;
+    const isEventLive = true;
 
     if (!isEventLive) {
         return (
@@ -68,7 +68,6 @@ export default function ScoreboardPage() {
     }));
 
     const hasTeams = teams.length > 0;
-    const hasScores = teams.some((t) => t.score > 0);
 
     return (
         <main className="relative min-h-screen text-white px-4 py-12 bg-gray-900">
@@ -107,8 +106,6 @@ export default function ScoreboardPage() {
                     <div>
                         {!hasTeams ? (
                             <EmptyState message="No teams have been accepted yet." />
-                        ) : !hasScores ? (
-                            <EmptyState message="Scoreboard will be available on event day." />
                         ) : (
                             <section className="text-2xl text-center max-w-2xl mx-auto flex flex-col gap-3">
                                 {teamsWithRank.map((team) => (
@@ -124,8 +121,6 @@ export default function ScoreboardPage() {
                     <div>
                         {!hasTeams ? (
                             <EmptyState message="No teams have been accepted yet." />
-                        ) : !hasScores ? (
-                            <EmptyState message="Scoreboard will be available on event day." />
                         ) : (
                             <ScoreGrid teams={teamsWithRank} />
                         )}

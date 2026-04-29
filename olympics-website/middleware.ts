@@ -2,7 +2,7 @@ import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const ADMIN_EMAILS = ["egeeskisar@gmail.com", "jhuacmofficers@gmail.com", "sethwyzy@gmail.com"];
+const ADMIN_EMAILS = ["jhuacmofficers@gmail.com"];
 
 export async function middleware(req: NextRequest) {
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });

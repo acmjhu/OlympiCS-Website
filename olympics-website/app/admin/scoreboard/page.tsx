@@ -9,7 +9,7 @@ import { IdCard } from "lucide-react";
 
 export default async function AdminScoreboard() {
     const session = await getServerSession(authOptions); 
-    if (!session || (session.user.email !== "jhuacmofficers@gmail.com" && session.user.email !== "sethwyzy@gmail.com")) {
+    if (!session || session.user.email !== "jhuacmofficers@gmail.com") {
         redirect("/403");
     } 
     const currentEvent = await prisma.event.findFirst({

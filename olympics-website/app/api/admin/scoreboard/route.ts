@@ -15,7 +15,7 @@ export async function POST(req:NextRequest) {
      
 
     const isAdmin =
-        session?.user?.role === "admin" || session?.user?.email === "jhuacmofficers@gmail.com" || session?.user?.email === "sethwyzy@gmail.com";
+        session?.user?.role === "admin" || session?.user?.email === "jhuacmofficers@gmail.com";
    
 
     if (!isAdmin) {
